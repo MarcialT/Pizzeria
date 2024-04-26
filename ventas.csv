@@ -1,0 +1,31 @@
+ID de venta;ID del cliente;Dinero gastado;Nombre de la pizza;Propina
+1;15;12.50;Napolitana;5.50
+2;3;15.75;Calzone;3.75
+3;9;12.50;Napolitana;2.30
+4;25;14.50;Cuatro quesos;4.80
+5;8;14.50;Pepperoni;6.60
+6;12;12.50;Napolitana;7.90
+7;28;15.75;Calzone;4.20
+8;7;12.50;Napolitana;6.40
+9;22;14.50;Cuatro quesos;8.75
+10;19;14.50;Pepperoni;10.25
+11;6;12.50;Napolitana;5.45
+12;13;15.75;Calzone;7.90
+13;2;12.50;Napolitana;9.50
+14;18;14.50;Cuatro quesos;6.25
+15;30;14.50;Pepperoni;10.75
+16;5;12.50;Napolitana;8.60
+17;29;15.75;Calzone;7.25
+18;1;12.50;Napolitana;12.80
+19;17;14.50;Cuatro quesos;9.75
+20;24;14.50;Pepperoni;5.90
+21;11;12.50;Napolitana;7.30
+22;4;15.75;Calzone;10.50
+23;23;12.50;Napolitana;6.20
+24;27;14.50;Cuatro quesos;11.40
+25;21;14.50;Pepperoni;14.00
+26;10;12.50;Napolitana;7.70
+27;20;15.75;Calzone;10.20
+28;26;12.50;Napolitana;12.80
+29;16;14.50;Cuatro quesos;8.90
+30;14;14.50;Pepperoni;9.10
