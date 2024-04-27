@@ -1,3 +1,9 @@
+
+#! Comentario de error
+#* Comentario de exito
+#? Comentario de duda
+# Comentario normal
+
 print("---BIENVENIDO A LA APP OFICIAL DE LA PIZZERIA---")
 trabajador_cliente = int(input("Usted es un cliente o trabajador?\n1.-Cliente\n2.-Trabajador\n"))
 if trabajador_cliente == 1:
