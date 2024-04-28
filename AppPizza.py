@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
-
 #! Comentario de error
 #* Comentario de exito
 #? Comentario de duda 
 #^ Comentario de incompleto
+#& Comentario de guia o ayuda
 # Comentario normal
 
 from random import *
@@ -11,15 +11,35 @@ import numpy as np
 import csv # Libreria para lectura y escritura de csv
 import os # Libreria para eliminar archivos
 
+archivoClientes = 'clientes.csv'
+
 capital = 0
 
+class Clientes:
+    def __init__(self, idCliente, nombre, apellido, email):
+        self.idCliente = idCliente
+        self.nombre = nombre
+        self.apellido = apellido
+        self.email = email
 
-def lectura_clientes():
-    with open('clientes.csv', 'r', newline = '') as clientesCSV:
-        contenidoClientes = csv.reader(clientesCSV, delimiter = ';')
-        return list(contenidoClientes)
-    
-listaClientes = lectura_clientes() # Se guarda el retorno de la funcion lectura clientes en la variable listaClientes
+    def __str__(self):
+        return(f"Id: {self.idCliente}, Nombre: {self.nombre}, Apellido: {self.apellido}, Email: {self.email} ")
+
+def leerArchivoClientes(archivoClientes):
+    listaClientes = []
+    with open(archivoClientes, 'r', newline = '', encoding = 'utf-8') as clientesCsv:
+        lectorCsv = csv.reader(clientesCsv, delimiter = ';')
+        next(lectorCsv)
+        for fila in lectorCsv:
+            id, nombre, apellido, email = fila
+            cliente = Clientes(id, nombre, apellido, email)
+            listaClientes.append(cliente)
+    return listaClientes
+        
+listaClientes = leerArchivoClientes(archivoClientes)
+
+# for cliente in listaClientes: #& Estas dos lineas eran para comprobar el funcionamiento de la clase
+#     print(cliente) #& Estas dos lineas eran para comprobar el funcionamiento de la clase
 
 print("---BIENVENIDO A LA APP OFICIAL DE LA PIZZERIA---")
 trabajador_cliente = int(input("Usted es un cliente o trabajador?\n1.-Cliente\n2.-Trabajador\n"))
@@ -71,3 +91,5 @@ elif trabajador_cliente == 2:
 else:
     print("Ingrese una opcion valida por favor\n")
 
+# for fila in listaClientes:
+#     print(', '.join(fila))
