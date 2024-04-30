@@ -76,7 +76,7 @@ def buscarClientePorId(listaClientes, idCliente):
             return cliente
     return None
         
-def encontrarUltimoId(archivoClientes):
+def encontrarUltimoIdClientes(archivoClientes):
     ultimo_id = None
     with open(archivoClientes, 'r', newline='', encoding='utf-8') as clientesCsv:
         lectorCsv = csv.reader(clientesCsv, delimiter=';')
@@ -86,6 +86,18 @@ def encontrarUltimoId(archivoClientes):
             if ultimo_id is None or id_cliente > ultimo_id:
                 ultimo_id = id_cliente
     return ultimo_id
+
+def buscarVentaPorId(listaVentas, idVenta):
+    for venta in listaVentas:
+        if venta.idVenta == idVenta:
+            return venta
+    return None
+
+def propinasTotales(listaVentas):
+    contPropinas = 0
+    for venta in listaVentas:
+        contPropinas += float(venta.propina)
+    return contPropinas
         
 # for cliente in listaClientes: #& Estas dos lineas eran para comprobar el funcionamiento de la clase
 #     print(cliente) #& Estas dos lineas eran para comprobar el funcionamiento de la clase
@@ -111,7 +123,7 @@ if opcion_trabajador_cliente == "1":
                 verificar_opcion_registro = valor_numerico(opcionRegistro)
                 opcion_registro_verificada = verificar_opcion_registro
                 if opcion_registro_verificada == "1":
-                    ultimoId = encontrarUltimoId(archivoClientes)
+                    ultimoId = encontrarUltimoIdClientes(archivoClientes)
                     idNuevoUsuario = ultimoId + 1
                     nombreNuevoUsuario = input("Ingrese su nombre: ")
                     apellidoNuevoUsuario = input("Ingrese su apellido: ")
@@ -154,7 +166,8 @@ elif opcion_trabajador_cliente == "2":
             opcion_trabajador_verificada = input("Desea hacer algo mas?\n1.-Mostrar el capital actual de la pizzeria\n2.-Mostrar cuanto gasto un cliente\n3.-Mostrar cuanto queda de algun ingrediente\n4.-Modificar archivo de clientes o ventas\n5.-Mostrar total de propinas\n6.-Salir\n")
 
         elif opcion_trabajador_verificada == "5":
-            print("Funcion aun no implementada")
+            totalPropinas = propinasTotales(listaVentas)
+            print("\nEl total de propinas es: {:.2f}\n".format(totalPropinas))
             opcion_trabajador_verificada = input("Desea hacer algo mas?\n1.-Mostrar el capital actual de la pizzeria\n2.-Mostrar cuanto gasto un cliente\n3.-Mostrar cuanto queda de algun ingrediente\n4.-Modificar archivo de clientes o ventas\n5.-Mostrar total de propinas\n6.-Salir\n")
 
         elif opcion_trabajador_verificada == "6":
@@ -166,7 +179,7 @@ elif opcion_trabajador_cliente == "2":
 
 else:
     print("Ingrese una opcion valida por favor\n")
-print("Gracias por visitar la app de nuestra pizzeria, vuelve pronto:)")
+print("Gracias por visitar la app de nuestra pizzeria, vuelve pronto :)")
 # for fila in listaClientes:
 #     print(', '.join(fila))
 
