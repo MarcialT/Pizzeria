@@ -60,7 +60,6 @@ def encontrarUltimoId(archivoClientes):
 
 print("---BIENVENIDO A LA APP OFICIAL DE LA PIZZERIA---")
 trabajador_cliente = int(input("Usted es un cliente o trabajador?\n1.-Cliente\n2.-Trabajador\n"))
-
 if trabajador_cliente == 1:
     opcion_cliente = int(input("Que desea hacer?\n1.-Realizar un pedido\n2.-Salir\n"))
     while opcion_cliente != 2:
@@ -126,6 +125,6 @@ elif trabajador_cliente == 2:
 
 else:
     print("Ingrese una opcion valida por favor\n")
-
+print("Gracias por visitar la app de nuestra pizzeria, vuelve pronto:)")
 # for fila in listaClientes:
 #     print(', '.join(fila))
