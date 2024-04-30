@@ -98,6 +98,12 @@ def propinasTotales(listaVentas):
     for venta in listaVentas:
         contPropinas += float(venta.propina)
     return contPropinas
+
+def gananciasTotales(listaVentas):
+    contGanancia = 0
+    for venta in listaVentas:
+        contGanancia += float(venta.dineroGastado)
+    return contGanancia
         
 # for cliente in listaClientes: #& Estas dos lineas eran para comprobar el funcionamiento de la clase
 #     print(cliente) #& Estas dos lineas eran para comprobar el funcionamiento de la clase
@@ -171,7 +177,8 @@ elif opcion_trabajador_cliente == "2":
             opcion_trabajador_verificada = input("Desea hacer algo mas?\n1.-Mostrar el capital actual de la pizzeria\n2.-Mostrar cuanto gasto un cliente\n3.-Mostrar cuanto queda de algun ingrediente\n4.-Modificar archivo de clientes o ventas\n5.-Mostrar total de propinas\n6.-Mostrar total de ganancias\n7.-Salir\n")
 
         elif opcion_trabajador_verificada == "6":
-            print("Funcion aun no implementada")
+            totalGanancias = gananciasTotales(listaVentas)
+            print("\nEl total de ganancias obtenidas en las ventas es de: {:.2f}\n".format(totalGanancias))
             opcion_trabajador_verificada = input("Desea hacer algo mas?\n1.-Mostrar el capital actual de la pizzeria\n2.-Mostrar cuanto gasto un cliente\n3.-Mostrar cuanto queda de algun ingrediente\n4.-Modificar archivo de clientes o ventas\n5.-Mostrar total de propinas\n6.-Mostrar total de ganancias\n7.-Salir\n")
 
         elif opcion_trabajador_verificada == "7":
