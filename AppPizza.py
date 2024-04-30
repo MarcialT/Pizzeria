@@ -12,6 +12,8 @@ import csv # Libreria para lectura y escritura de csv
 import os # Libreria para eliminar archivos
 
 archivoClientes = 'clientes.csv'
+archivoVentas = 'ventas.csv'
+archivoInventario = 'inventario.csv'
 
 capital = 0
 
@@ -24,6 +26,17 @@ class Clientes:
 
     def __str__(self):
         return(f"Id: {self.idCliente}, Nombre: {self.nombre}, Apellido: {self.apellido}, Email: {self.email} ")
+    
+class Ventas:
+    def __init__(self, idVenta, idClienteVenta, dineroGastado, nombrePizza, propina):
+        self.idVenta = idVenta
+        self.idClienteVenta = idClienteVenta
+        self.dineroGastado = dineroGastado
+        self.nombrePizza = nombrePizza
+        self.propina = propina
+
+    def __str__(self):
+        return(f"Id venta: {self.idVenta}, Id cliente: {self.idClienteVenta}, Dinero gastado: {self.dineroGastado}, Nombre de la pizza: {self.nombrePizza}, Propina: {self.propina}")
     
 def valor_numerico(opcion):
     while not opcion.isdigit():
@@ -42,7 +55,19 @@ def leerArchivoClientes(archivoClientes):
             cliente = Clientes(id, nombre, apellido, email)
             listaClientes.append(cliente)
     return listaClientes
-        
+
+def leerArchivoVentas(archivoVentas):
+    listaVentas = []
+    with open(archivoVentas, 'r', newline = '', encoding = 'utf-8') as ventasCsv:
+        lectorCsv2 = csv.reader(ventasCsv, delimiter = ';')
+        next(lectorCsv2)
+        for fila in lectorCsv2:
+            idventa, idclienteventa, dinero, pizza, prop = fila
+            venta = Ventas(idventa, idclienteventa, dinero, pizza, prop)
+            listaVentas.append(venta)
+    return listaVentas
+
+listaVentas = leerArchivoVentas(archivoVentas)    
 listaClientes = leerArchivoClientes(archivoClientes)
 
 def buscarClientePorId(listaClientes, idCliente):
