@@ -56,6 +56,15 @@ def leerArchivoClientes(archivoClientes):
             listaClientes.append(cliente)
     return listaClientes
 
+def mostrar_ingrediente(archivo_inventario):
+    with open(archivo_inventario) as archivo:
+        contenido = csv.reader(archivo,delimiter=';')
+        buscador_ingr = input("Ingrese el ingrediente a buscar: ").lower()
+        for linea in contenido:
+            if linea[0].lower() == buscador_ingr:
+                print("La cantidad de {} que queda es {}\n".format(buscador_ingr,linea[1]))
+    archivo.close()
+
 def leerArchivoVentas(archivoVentas):
     listaVentas = []
     with open(archivoVentas, 'r', newline = '', encoding = 'utf-8') as ventasCsv:
@@ -185,7 +194,7 @@ elif opcion_trabajador_cliente == "2":
                 opcion_trabajador_verificada = input("Desea hacer algo mas?\n1.-Mostrar el capital actual de la pizzeria\n2.-Mostrar cuanto gasto un cliente\n3.-Mostrar cuanto queda de algun ingrediente\n4.-Modificar archivo de clientes o ventas\n5.-Mostrar total de propinas\n6.-Mostrar total de ganancias\n7.-Salir\n")
 
         elif opcion_trabajador_verificada == "3":
-            print("Funcion aun no implementada")
+            mostrar_ingrediente("inventario.csv")
             opcion_trabajador_verificada = input("Desea hacer algo mas?\n1.-Mostrar el capital actual de la pizzeria\n2.-Mostrar cuanto gasto un cliente\n3.-Mostrar cuanto queda de algun ingrediente\n4.-Modificar archivo de clientes o ventas\n5.-Mostrar total de propinas\n6.-Mostrar total de ganancias\n7.-Salir\n")
 
         elif opcion_trabajador_verificada == "4":
