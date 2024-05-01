@@ -121,9 +121,10 @@ def gastoTotalCliente(listaVentas, idClienteVenta):
             contGasto += float(venta.dineroGastado)
     return contGasto
 
-def pizzaNapolitana(archivoInventario):
+def pizzaNapolitana(archivoInventario, factura):
     elegir_tamaño = input("\nIngrese el tamaño de su Pizza Napolitana :)\n1-Tamaño personal\n2-Tamaño mediano\n3-Tamaño familiar\n")
     if elegir_tamaño == "1":
+        factura += 6.50
         with open(archivoInventario,'r') as archivo:
             contenido = csv.reader(archivo, delimiter = ';') 
             datos = list(contenido)
@@ -152,16 +153,18 @@ def pizzaNapolitana(archivoInventario):
                 if servilleta in fila:
                     pos4 = int(fila[1])
                     pos4 -= 1
-                    fila[1] = str(pos4)    
+                    fila[1] = str(pos4)
+                        
         with open(archivoInventario,'w', newline = '') as archivo:
             escritor = csv.writer(archivo, delimiter = ';')
             escritor.writerows(datos)
-
+        
     elif elegir_tamaño == "2":
+        factura += 8
         with open(archivoInventario,'r') as archivo:
             contenido = csv.reader(archivo, delimiter = ';') 
             datos = list(contenido)
-            caja = "cajaPersonal"
+            caja = "cajaMediana"
             salsa = "salsa"
             queso = "mozzarella"
             masa = "masa"
@@ -187,49 +190,54 @@ def pizzaNapolitana(archivoInventario):
                     pos4 = int(fila[1])
                     pos4 -= 1
                     fila[1] = str(pos4)
+        
         with open(archivoInventario,'w', newline = '') as archivo:
             escritor = csv.writer(archivo, delimiter = ';')
             escritor.writerows(datos)    
 
     elif elegir_tamaño == "3":
-            with open(archivoInventario,'r') as archivo:
-                contenido = csv.reader(archivo, delimiter = ';') 
-                datos = list(contenido)
-                caja = "cajaPersonal"
-                salsa = "salsa"
-                queso = "mozzarella"
-                masa = "masa"
-                servilleta = "servilleta"
-                for fila in datos:
-                    if queso in fila:
-                        pos = int(fila[1])
-                        pos -= 3
-                        fila[1] = str(pos)
-                    if masa in fila:
-                        pos1 = int(fila[1])
-                        pos1 -= 3
-                        fila[1] = str(pos1)
-                    if salsa in fila:
-                        pos2 = int(fila[1])  
-                        pos2 -= 3
-                        fila[1] = str(pos2)
-                    if caja in fila:
-                        pos3 = int(fila[1])      
-                        pos3 -= 1
-                        fila[1] = str(pos3)
-                    if servilleta in fila:
-                        pos4 = int(fila[1])  
-                        pos4 -= 1
-                        fila[1] = str(pos4)  
+        factura += 10
+        with open(archivoInventario,'r') as archivo:
+            contenido = csv.reader(archivo, delimiter = ';') 
+            datos = list(contenido)
+            caja = "cajaFamiliar"
+            salsa = "salsa"
+            queso = "mozzarella"
+            masa = "masa"
+            servilleta = "servilleta"
+            for fila in datos:
+                if queso in fila:
+                    pos = int(fila[1])
+                    pos -= 3
+                    fila[1] = str(pos)
+                if masa in fila:
+                    pos1 = int(fila[1])
+                    pos1 -= 3
+                    fila[1] = str(pos1)
+                if salsa in fila:
+                    pos2 = int(fila[1])  
+                    pos2 -= 3
+                    fila[1] = str(pos2)
+                if caja in fila:
+                    pos3 = int(fila[1])      
+                    pos3 -= 1
+                    fila[1] = str(pos3)
+                if servilleta in fila:
+                    pos4 = int(fila[1])  
+                    pos4 -= 1
+                    fila[1] = str(pos4)  
             with open(archivoInventario,'w', newline = '') as archivo:
                 escritor = csv.writer(archivo, delimiter = ';')
                 escritor.writerows(datos)
     else:
         print("Elija una opcion valida")
 
-def pizzaPepperoni(archivoInventario):
+    return factura
+
+def pizzaPepperoni(archivoInventario, factura):
     elegir_tamaño = input("\nIngrese el tamaño de su Pizza Pepperoni :)\n1-Tamaño personal\n2-Tamaño mediano\n3-Tamaño familiar\n")
     if elegir_tamaño == "1":
+        factura += 7.50
         with open(archivoInventario,'r') as archivo:
             contenido = csv.reader(archivo, delimiter = ';') 
             datos = list(contenido)
@@ -269,10 +277,11 @@ def pizzaPepperoni(archivoInventario):
             escritor.writerows(datos)
 
     elif elegir_tamaño == "2":
+        factura += 9.50
         with open(archivoInventario,'r') as archivo:
             contenido = csv.reader(archivo, delimiter = ';') 
             datos = list(contenido)
-            caja = "cajaPersonal"
+            caja = "cajaMediana"
             salsa = "salsa"
             queso = "mozzarella"
             masa = "masa"
@@ -308,50 +317,51 @@ def pizzaPepperoni(archivoInventario):
             escritor.writerows(datos)    
 
     elif elegir_tamaño == "3":
-            with open(archivoInventario,'r') as archivo:
-                contenido = csv.reader(archivo, delimiter = ';') 
-                datos = list(contenido)
-                caja = "cajaPersonal"
-                salsa = "salsa"
-                queso = "mozzarella"
-                masa = "masa"
-                servilleta = "servilleta"
-                pepperoni = "pepperoni"
-                for fila in datos:
-                    if queso in fila:
-                        pos = int(fila[1])
-                        pos -= 3
-                        fila[1] = str(pos)
-                    if masa in fila:
-                        pos1 = int(fila[1])
-                        pos1 -= 3
-                        fila[1] = str(pos1)
-                    if salsa in fila:
-                        pos2 = int(fila[1])  
-                        pos2 -= 3
-                        fila[1] = str(pos2)
-                    if caja in fila:
-                        pos3 = int(fila[1])      
-                        pos3 -= 1
-                        fila[1] = str(pos3)
-                    if servilleta in fila:
-                        pos4 = int(fila[1])  
-                        pos4 -= 1
-                        fila[1] = str(pos4)
-                    if pepperoni in fila:
-                        pos5 = int(fila[1])
-                        pos5 -= 3
-                        fila[1] = str(pos5)     
+        factura += 12
+        with open(archivoInventario,'r') as archivo:
+            contenido = csv.reader(archivo, delimiter = ';') 
+            datos = list(contenido)
+            caja = "cajaFamiliar"
+            salsa = "salsa"
+            queso = "mozzarella"
+            masa = "masa"
+            servilleta = "servilleta"
+            pepperoni = "pepperoni"
+            for fila in datos:
+                if queso in fila:
+                    pos = int(fila[1])
+                    pos -= 3
+                    fila[1] = str(pos)
+                if masa in fila:
+                    pos1 = int(fila[1])
+                    pos1 -= 3
+                    fila[1] = str(pos1)
+                if salsa in fila:
+                    pos2 = int(fila[1])  
+                    pos2 -= 3
+                    fila[1] = str(pos2)
+                if caja in fila:
+                    pos3 = int(fila[1])      
+                    pos3 -= 1
+                    fila[1] = str(pos3)
+                if servilleta in fila:
+                    pos4 = int(fila[1])  
+                    pos4 -= 1
+                    fila[1] = str(pos4)
+                if pepperoni in fila:
+                    pos5 = int(fila[1])
+                    pos5 -= 3
+                    fila[1] = str(pos5)     
             with open(archivoInventario,'w', newline = '') as archivo:
                 escritor = csv.writer(archivo, delimiter = ';')
                 escritor.writerows(datos)
     else:
         print("Elija una opcion valida")
+    return factura
 
-pruebaPepperoni = pizzaPepperoni(archivoInventario)
-
-def calzone(archivoInventario):
+def calzone(archivoInventario, factura):
     eleccion_ingrediente = input("Que ingrediente desea agregar a su calzone? ").lower()
+    factura += 5.50
     with open(archivoInventario,'r') as archivo:
         contenido = csv.reader(archivo, delimiter = ';')
         datos = list(contenido)
@@ -390,6 +400,7 @@ def calzone(archivoInventario):
     with open(archivoInventario, 'w', newline = '') as archivo:
         escritor = csv.writer(archivo, delimiter = ';')
         escritor.writerows(datos)
+    return factura
 
 # for cliente in listaClientes: #& Estas dos lineas eran para comprobar el funcionamiento de la clase
 #     print(cliente) #& Estas dos lineas eran para comprobar el funcionamiento de la clase
@@ -408,8 +419,24 @@ if opcion_trabajador_cliente == "1":
             idIngreso = input("Ingrese su Id por favor: ")
             verificarCliente = buscarClientePorId(listaClientes, idIngreso)
             if verificarCliente:
-                print(f"Hola {verificarCliente.nombre}, cual es su pedido?")
-                break #^ Coloco break mientras tanto porque aun no se ha implementado una funcion para hacer pedido
+                opcion_pedido = input(f"Hola {verificarCliente.nombre}, cual es su pedido?\n1.-Pizza Napolitana\n2.-Pizza Pepperoni\n3.-Pizza Cuatro Quesos\n4.-Calzone\n5.-Finalizar pedido\n")
+                factura = 0
+                while opcion_pedido != "5":
+                    if opcion_pedido == "1":
+                        factura = pizzaNapolitana(archivoInventario, factura)
+                        opcion_pedido = input(f"Pizza agregada a su factura, el total a pagar es: {factura}$, desea agregar algun producto mas?\n1.-Pizza Napolitana\n2.-Pizza Pepperoni\n3.-Pizza Cuatro Quesos\n4.-Calzone\n5.-Finalizar pedido\n")
+                    elif opcion_pedido == "2":
+                        factura = pizzaPepperoni(archivoInventario, factura)
+                        opcion_pedido = input(f"Pizza agregada a su factura, el total a pagar es: {factura}$, desea agregar algun producto mas?\n1.-Pizza Napolitana\n2.-Pizza Pepperoni\n3.-Pizza Cuatro Quesos\n4.-Calzone\n5.-Finalizar pedido\n")
+                    elif opcion_pedido == "3":
+                        print("Pizza aun no disponible")
+                        opcion_pedido = input(f"Pizza agregada a su factura, el total a pagar es: {factura}$, desea agregar algun producto mas?\n1.-Pizza Napolitana\n2.-Pizza Pepperoni\n3.-Pizza Cuatro Quesos\n4.-Calzone\n5.-Finalizar pedido\n")
+                    elif opcion_pedido == "4":
+                        factura = calzone(archivoInventario, factura)
+                        opcion_pedido = input(f"Calzone agregado a su factura, el total a pagar es: {factura}$, desea agregar algun producto mas?\n1.-Pizza Napolitana\n2.-Pizza Pepperoni\n3.-Pizza Cuatro Quesos\n4.-Calzone\n5.-Finalizar pedido\n")
+                    else:
+                        opcion_pedido = input(f"Ingrese una opcion valida, el total a pagar es: {factura}$, desea agregar algun producto mas?\n1.-Pizza Napolitana\n2.-Pizza Pepperoni\n3.-Pizza Cuatro Quesos\n4.-Calzone\n5.-Finalizar pedido\n")
+                break #^ Coloco break aqui ya que aun falta mas por agregar en el menu de pedidos
             else:
                 opcionRegistro = input("Id no encontrado, desea registrarse?\n\n1.-Si\n2.-No\n")
                 verificar_opcion_registro = valor_numerico(opcionRegistro)
@@ -484,6 +511,5 @@ elif opcion_trabajador_cliente == "2":
 else:
     print("Ingrese una opcion valida por favor\n")
 print("Gracias por visitar la app de nuestra pizzeria, vuelve pronto :)")
-print("sexo de furros")
 # for fila in listaClientes:
 #     print(', '.join(fila))
