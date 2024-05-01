@@ -161,7 +161,7 @@ def pizzaNapolitana(archivoInventario):
         with open(archivoInventario,'r') as archivo:
             contenido = csv.reader(archivo, delimiter = ';') 
             datos = list(contenido)
-            caja = "cajaPersonal"
+            caja = "cajaMediana"
             salsa = "salsa"
             queso = "mozzarella"
             masa = "masa"
@@ -195,7 +195,7 @@ def pizzaNapolitana(archivoInventario):
             with open(archivoInventario,'r') as archivo:
                 contenido = csv.reader(archivo, delimiter = ';') 
                 datos = list(contenido)
-                caja = "cajaPersonal"
+                caja = "cajaFamiliar"
                 salsa = "salsa"
                 queso = "mozzarella"
                 masa = "masa"
