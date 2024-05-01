@@ -400,9 +400,11 @@ def calzone(archivoInventario, factura):
     with open(archivoInventario, 'w', newline = '') as archivo:
         escritor = csv.writer(archivo, delimiter = ';')
         escritor.writerows(datos)
+    return factura
 
-def cuatroQuesos(archivoInventario):
-    elegir_tamaño = input("\nIngrese el tamaño de su pizza\n1-Tamaño personal\n2-Tamaño mediano\n3-Tamaño familiar\n").lower()
+def cuatroQuesos(archivoInventario, factura):
+    elegir_tamaño = input("\nIngrese el tamaño de su pizza Cuatro Quesos\n1-Tamaño personal\n2-Tamaño mediano\n3-Tamaño familiar\n").lower()
+    factura += 8.50
     if elegir_tamaño == "1":
         with open(archivoInventario,'r') as archivo:
             contenido = csv.reader(archivo, delimiter=';')
@@ -453,101 +455,104 @@ def cuatroQuesos(archivoInventario):
             escritor.writerows(lista)
         
     elif elegir_tamaño == "2":
-            with open(archivoInventario,'r') as archivo:
-                contenido = csv.reader(archivo, delimiter=';')
-                lista = list(contenido)
-                caja_mediana = "cajaMediana"
-                servilleta = "servilleta"
-                masa = "masa"
-                salsa = "salsa"
-                mozzarella = "mozzarella"
-                roquefort = "quesoRoquefort"
-                rabiola = "quesoRabiola"
-                pecorino = "quesoPecorino"
-                for linea in lista:
-                    if caja_mediana in linea:
-                        pos = int(linea[1])
-                        pos -= 1
-                        linea[1] = str(pos)
-                    if servilleta in linea:
-                        pos1 = int(linea[1])    
-                        pos1 -= 1
-                        linea[1] = str(pos1)
-                    if masa in linea:
-                        pos2 = int(linea[1])
-                        pos2 -= 2
-                        linea[1] = str(pos2)    
-                    if salsa in linea:
-                        pos3 = int(linea[1])
-                        pos3 -= 2
-                        linea[1] = str(pos3)    
-                    if mozzarella in linea:
-                        pos4 = int(linea[1])
-                        pos4 -= 2
-                        linea[1] = str(pos4)    
-                    if roquefort in linea:
-                        pos5 = int(linea[1])
-                        pos5 -= 2
-                        linea[1] = str(pos5)    
-                    if rabiola in linea:
-                        pos6 = int(linea[1])
-                        pos6 -= 2
-                        linea[1] = str(pos6)    
-                    if pecorino in linea:
-                        pos7 = int(linea[1])  
-                        pos7 -= 2
-                        linea[1] = str(pos7)  
-            with open(archivoInventario, 'w', newline='') as archivo:
-                escritor = csv.writer(archivo, delimiter = ';')
-                escritor.writerows(lista)
+        factura += 11
+        with open(archivoInventario,'r') as archivo:
+            contenido = csv.reader(archivo, delimiter=';')
+            lista = list(contenido)
+            caja_mediana = "cajaMediana"
+            servilleta = "servilleta"
+            masa = "masa"
+            salsa = "salsa"
+            mozzarella = "mozzarella"
+            roquefort = "quesoRoquefort"
+            rabiola = "quesoRabiola"
+            pecorino = "quesoPecorino"
+            for linea in lista:
+                if caja_mediana in linea:
+                    pos = int(linea[1])
+                    pos -= 1
+                    linea[1] = str(pos)
+                if servilleta in linea:
+                    pos1 = int(linea[1])    
+                    pos1 -= 1
+                    linea[1] = str(pos1)
+                if masa in linea:
+                    pos2 = int(linea[1])
+                    pos2 -= 2
+                    linea[1] = str(pos2)    
+                if salsa in linea:
+                    pos3 = int(linea[1])
+                    pos3 -= 2
+                    linea[1] = str(pos3)    
+                if mozzarella in linea:
+                    pos4 = int(linea[1])
+                    pos4 -= 2
+                    linea[1] = str(pos4)    
+                if roquefort in linea:
+                    pos5 = int(linea[1])
+                    pos5 -= 2
+                    linea[1] = str(pos5)    
+                if rabiola in linea:
+                    pos6 = int(linea[1])
+                    pos6 -= 2
+                    linea[1] = str(pos6)    
+                if pecorino in linea:
+                    pos7 = int(linea[1])  
+                    pos7 -= 2
+                    linea[1] = str(pos7)  
+        with open(archivoInventario, 'w', newline='') as archivo:
+            escritor = csv.writer(archivo, delimiter = ';')
+            escritor.writerows(lista)
     elif elegir_tamaño == "3":
-            with open(archivoInventario,'r') as archivo:
-                contenido = csv.reader(archivo, delimiter=';')
-                lista = list(contenido)
-                caja_familiar = "cajaFamiliar"
-                servilleta = "servilleta"
-                masa = "masa"
-                salsa = "salsa"
-                mozzarella = "mozzarella"
-                roquefort = "quesoRoquefort"
-                rabiola = "quesoRabiola"
-                pecorino = "quesoPecorino"
-                for linea in lista:
-                    if caja_familiar in linea:
-                        pos = int(linea[1])
-                        pos -= 1
-                        linea[1] = str(pos)
-                    if servilleta in linea:
-                        pos1 = int(linea[1])    
-                        pos1 -= 1
-                        linea[1] = str(pos1)
-                    if masa in linea:
-                        pos2 = int(linea[1])
-                        pos2 -= 3
-                        linea[1] = str(pos2)    
-                    if salsa in linea:
-                        pos3 = int(linea[1])
-                        pos3 -= 3
-                        linea[1] = str(pos3)    
-                    if mozzarella in linea:
-                        pos4 = int(linea[1])
-                        pos4 -= 3
-                        linea[1] = str(pos4)    
-                    if roquefort in linea:
-                        pos5 = int(linea[1])
-                        pos5 -= 3
-                        linea[1] = str(pos5)    
-                    if rabiola in linea:
-                        pos6 = int(linea[1])
-                        pos6 -= 3
-                        linea[1] = str(pos6)    
-                    if pecorino in linea:
-                        pos7 = int(linea[1])  
-                        pos7 -= 3
-                        linea[1] = str(pos7)  
-            with open(archivoInventario, 'w', newline='') as archivo:
-                escritor = csv.writer(archivo, delimiter = ';')
-                escritor.writerows(lista)
+        factura += 13.50
+        with open(archivoInventario,'r') as archivo:
+            contenido = csv.reader(archivo, delimiter=';')
+            lista = list(contenido)
+            caja_familiar = "cajaFamiliar"
+            servilleta = "servilleta"
+            masa = "masa"
+            salsa = "salsa"
+            mozzarella = "mozzarella"
+            roquefort = "quesoRoquefort"
+            rabiola = "quesoRabiola"
+            pecorino = "quesoPecorino"
+            for linea in lista:
+                if caja_familiar in linea:
+                    pos = int(linea[1])
+                    pos -= 1
+                    linea[1] = str(pos)
+                if servilleta in linea:
+                    pos1 = int(linea[1])    
+                    pos1 -= 1
+                    linea[1] = str(pos1)
+                if masa in linea:
+                    pos2 = int(linea[1])
+                    pos2 -= 3
+                    linea[1] = str(pos2)    
+                if salsa in linea:
+                    pos3 = int(linea[1])
+                    pos3 -= 3
+                    linea[1] = str(pos3)    
+                if mozzarella in linea:
+                    pos4 = int(linea[1])
+                    pos4 -= 3
+                    linea[1] = str(pos4)    
+                if roquefort in linea:
+                    pos5 = int(linea[1])
+                    pos5 -= 3
+                    linea[1] = str(pos5)    
+                if rabiola in linea:
+                    pos6 = int(linea[1])
+                    pos6 -= 3
+                    linea[1] = str(pos6)    
+                if pecorino in linea:
+                    pos7 = int(linea[1])  
+                    pos7 -= 3
+                    linea[1] = str(pos7)  
+        with open(archivoInventario, 'w', newline='') as archivo:
+            escritor = csv.writer(archivo, delimiter = ';')
+            escritor.writerows(lista)
+    return factura
                 
 # prubaGastoCliente = input("Ingrese el id: ")
 # pruebaGastoCliente = gastoTotalCliente(listaVentas, prubaGastoCliente)
@@ -582,7 +587,7 @@ if opcion_trabajador_cliente == "1":
                         factura = pizzaPepperoni(archivoInventario, factura)
                         opcion_pedido = input(f"Pizza agregada a su factura, el total a pagar es: {factura}$, desea agregar algun producto mas?\n1.-Pizza Napolitana\n2.-Pizza Pepperoni\n3.-Pizza Cuatro Quesos\n4.-Calzone\n5.-Finalizar pedido\n")
                     elif opcion_pedido == "3":
-                        print("Pizza aun no disponible")
+                        factura = cuatroQuesos(archivoInventario, factura)
                         opcion_pedido = input(f"Pizza agregada a su factura, el total a pagar es: {factura}$, desea agregar algun producto mas?\n1.-Pizza Napolitana\n2.-Pizza Pepperoni\n3.-Pizza Cuatro Quesos\n4.-Calzone\n5.-Finalizar pedido\n")
                     elif opcion_pedido == "4":
                         factura = calzone(archivoInventario, factura)
