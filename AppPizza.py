@@ -131,6 +131,7 @@ def pizzaNapolitana(archivoInventario):
             salsa = "salsa"
             queso = "mozzarella"
             masa = "masa"
+            servilleta = "servilleta"
             for fila in datos:
                 if queso in fila:
                     pos = int(fila[1])
@@ -148,6 +149,10 @@ def pizzaNapolitana(archivoInventario):
                     pos3 = int(fila[1])      
                     pos3 -= 1
                     fila[1] = str(pos3)
+                if servilleta in fila:
+                    pos4 = int(fila[1])
+                    pos4 -= 1
+                    fila[1] = str(pos4)    
         with open(archivoInventario,'w', newline = '') as archivo:
             escritor = csv.writer(archivo, delimiter = ';')
             escritor.writerows(datos)
@@ -160,6 +165,7 @@ def pizzaNapolitana(archivoInventario):
             salsa = "salsa"
             queso = "mozzarella"
             masa = "masa"
+            servilleta = "servilleta"
             for fila in datos:
                 if queso in fila:
                     pos = int(fila[1])
@@ -175,8 +181,12 @@ def pizzaNapolitana(archivoInventario):
                     fila[1] = str(pos2)
                 if caja in fila:
                     pos3 = int(fila[1])      
-                    pos3 -= 2
+                    pos3 -= 1
                     fila[1] = str(pos3)
+                if servilleta in fila:
+                    pos4 = int(fila[1])
+                    pos4 -= 1
+                    fila[1] = str(pos4)
         with open(archivoInventario,'w', newline = '') as archivo:
             escritor = csv.writer(archivo, delimiter = ';')
             escritor.writerows(datos)    
@@ -189,6 +199,7 @@ def pizzaNapolitana(archivoInventario):
                 salsa = "salsa"
                 queso = "mozzarella"
                 masa = "masa"
+                servilleta = "servilleta"
                 for fila in datos:
                     if queso in fila:
                         pos = int(fila[1])
@@ -204,12 +215,61 @@ def pizzaNapolitana(archivoInventario):
                         fila[1] = str(pos2)
                     if caja in fila:
                         pos3 = int(fila[1])      
-                        pos3 -= 3
+                        pos3 -= 1
                         fila[1] = str(pos3)
+                    if servilleta in fila:
+                        pos4 = int(fila[1])  
+                        pos4 -= 1
+                        fila[1] = str(pos4)  
             with open(archivoInventario,'w', newline = '') as archivo:
                 escritor = csv.writer(archivo, delimiter = ';')
                 escritor.writerows(datos)
-        
+
+def calzone(archivoInventario):
+    eleccion_ingrediente = input("Que ingrediente desea agregar a su calzone? ").lower()
+    with open(archivoInventario,'r') as archivo:
+        contenido = csv.reader(archivo, delimiter = ';')
+        datos = list(contenido)
+        masa = "masa"
+        salsa = "salsa"
+        queso = "mozzarella"
+        caja = "cajaPersonal"
+        servilleta = "servilleta"
+        # print(datos)
+        for linea in datos:
+            # print(linea)
+            if eleccion_ingrediente in linea:
+                pos = int(linea[1])
+                pos -= 1
+                linea[1] = str(pos)
+            if masa in linea:
+                pos1 = int(linea[1])
+                pos1 -= 1
+                linea[1] = str(pos1)
+            if salsa in linea:
+                pos2 = int(linea[1])
+                pos2 -= 1
+                linea[1] = str(pos2)
+            if queso in linea:
+                pos3 = int(linea[1])
+                pos3 -= 1
+                linea[1] = str(pos3)
+            if caja in linea:
+                pos4 = int(linea[1])
+                pos4 -= 1
+                linea[1] = str(pos4)
+            if servilleta in linea:
+                pos5 = int(linea[1])
+                pos5 -= 1
+                linea[1] = str(pos5)   
+    with open(archivoInventario, 'w', newline = '') as archivo:
+        escritor = csv.writer(archivo, delimiter = ';')
+        escritor.writerows(datos)
+
+calzone(archivoInventario)
+
+            
+           
             
 
 # prubaGastoCliente = input("Ingrese el id: ")
