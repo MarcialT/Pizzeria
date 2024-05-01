@@ -311,5 +311,6 @@ elif opcion_trabajador_cliente == "2":
 else:
     print("Ingrese una opcion valida por favor\n")
 print("Gracias por visitar la app de nuestra pizzeria, vuelve pronto :)")
+print("sexo de furros")
 # for fila in listaClientes:
 #     print(', '.join(fila))
