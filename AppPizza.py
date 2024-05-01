@@ -104,6 +104,20 @@ def gananciasTotales(listaVentas):
     for venta in listaVentas:
         contGanancia += float(venta.dineroGastado)
     return contGanancia
+
+def gastoTotalCliente(listaVentas, idClienteVenta):
+    contGasto = 0
+    for venta in listaVentas:
+        if idClienteVenta == venta.idClienteVenta:
+            contGasto += float(venta.dineroGastado)
+    return contGasto
+
+
+# prubaGastoCliente = input("Ingrese el id: ")
+# pruebaGastoCliente = gastoTotalCliente(listaVentas, prubaGastoCliente)
+# print(pruebaGastoCliente)
+
+
         
 # for cliente in listaClientes: #& Estas dos lineas eran para comprobar el funcionamiento de la clase
 #     print(cliente) #& Estas dos lineas eran para comprobar el funcionamiento de la clase
@@ -160,8 +174,15 @@ elif opcion_trabajador_cliente == "2":
             opcion_trabajador_verificada = input("Desea hacer algo mas?\n1.-Mostrar el capital actual de la pizzeria\n2.-Mostrar cuanto gasto un cliente\n3.-Mostrar cuanto queda de algun ingrediente\n4.-Modificar archivo de clientes o ventas\n5.-Mostrar total de propinas\n6.-Mostrar total de ganancias\n7.-Salir\n")
         
         elif opcion_trabajador_verificada == "2":
-            print("Funcion aun no implementada")
-            opcion_trabajador_verificada = input("Desea hacer algo mas?\n1.-Mostrar el capital actual de la pizzeria\n2.-Mostrar cuanto gasto un cliente\n3.-Mostrar cuanto queda de algun ingrediente\n4.-Modificar archivo de clientes o ventas\n5.-Mostrar total de propinas\n6.-Mostrar total de ganancias\n7.-Salir\n")
+            id_buscar_gasto = input("Ingrese el Id del cliente para buscar su gasto total: ")
+            id_buscar_gasto_verificar = valor_numerico(id_buscar_gasto)
+            id_buscar_gasto_verificada = id_buscar_gasto_verificar
+            gastoCliente = gastoTotalCliente(listaVentas, id_buscar_gasto_verificada)
+            if gastoCliente == 0.00:
+                print("\nId no encontrado\n")
+            else:
+                print("\nEl gasto total del cliente con Id {} es: {:.2f}\n".format(id_buscar_gasto_verificada, gastoCliente))
+                opcion_trabajador_verificada = input("Desea hacer algo mas?\n1.-Mostrar el capital actual de la pizzeria\n2.-Mostrar cuanto gasto un cliente\n3.-Mostrar cuanto queda de algun ingrediente\n4.-Modificar archivo de clientes o ventas\n5.-Mostrar total de propinas\n6.-Mostrar total de ganancias\n7.-Salir\n")
 
         elif opcion_trabajador_verificada == "3":
             print("Funcion aun no implementada")
