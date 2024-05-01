@@ -58,7 +58,7 @@ def leerArchivoClientes(archivoClientes):
 
 def mostrar_ingrediente(archivo_inventario):
     with open(archivo_inventario) as archivo:
-        contenido = csv.reader(archivo,delimiter=';')
+        contenido = csv.reader(archivo, delimiter = ';')
         buscador_ingr = input("Ingrese el ingrediente a buscar: ").lower()
         for linea in contenido:
             if linea[0].lower() == buscador_ingr:
