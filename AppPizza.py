@@ -121,6 +121,96 @@ def gastoTotalCliente(listaVentas, idClienteVenta):
             contGasto += float(venta.dineroGastado)
     return contGasto
 
+def pizzaNapolitana(archivoInventario):
+    elegir_tamaño = input("\nIngrese el tamaño de su pizza\n1-Tamaño personal\n2-Tamaño mediano\n3-Tamaño familiar\n")
+    if elegir_tamaño == "1":
+        with open(archivoInventario,'r') as archivo:
+            contenido = csv.reader(archivo, delimiter = ';') 
+            datos = list(contenido)
+            caja = "cajaPersonal"
+            salsa = "salsa"
+            queso = "mozzarella"
+            masa = "masa"
+            for fila in datos:
+                if queso in fila:
+                    pos = int(fila[1])
+                    pos -= 1
+                    fila[1] = str(pos)
+                if masa in fila:
+                    pos1 = int(fila[1])
+                    pos1 -= 1
+                    fila[1] = str(pos1)
+                if salsa in fila:
+                    pos2 = int(fila[1])  
+                    pos2 -= 1
+                    fila[1] = str(pos2)
+                if caja in fila:
+                    pos3 = int(fila[1])      
+                    pos3 -= 1
+                    fila[1] = str(pos3)
+        with open(archivoInventario,'w', newline = '') as archivo:
+            escritor = csv.writer(archivo, delimiter = ';')
+            escritor.writerows(datos)
+
+    elif elegir_tamaño == "2":
+        with open(archivoInventario,'r') as archivo:
+            contenido = csv.reader(archivo, delimiter = ';') 
+            datos = list(contenido)
+            caja = "cajaPersonal"
+            salsa = "salsa"
+            queso = "mozzarella"
+            masa = "masa"
+            for fila in datos:
+                if queso in fila:
+                    pos = int(fila[1])
+                    pos -= 2
+                    fila[1] = str(pos)
+                if masa in fila:
+                    pos1 = int(fila[1])
+                    pos1 -= 2
+                    fila[1] = str(pos1)
+                if salsa in fila:
+                    pos2 = int(fila[1])  
+                    pos2 -= 2
+                    fila[1] = str(pos2)
+                if caja in fila:
+                    pos3 = int(fila[1])      
+                    pos3 -= 2
+                    fila[1] = str(pos3)
+        with open(archivoInventario,'w', newline = '') as archivo:
+            escritor = csv.writer(archivo, delimiter = ';')
+            escritor.writerows(datos)    
+
+    elif elegir_tamaño == "3":
+            with open(archivoInventario,'r') as archivo:
+                contenido = csv.reader(archivo, delimiter = ';') 
+                datos = list(contenido)
+                caja = "cajaPersonal"
+                salsa = "salsa"
+                queso = "mozzarella"
+                masa = "masa"
+                for fila in datos:
+                    if queso in fila:
+                        pos = int(fila[1])
+                        pos -= 3
+                        fila[1] = str(pos)
+                    if masa in fila:
+                        pos1 = int(fila[1])
+                        pos1 -= 3
+                        fila[1] = str(pos1)
+                    if salsa in fila:
+                        pos2 = int(fila[1])  
+                        pos2 -= 3
+                        fila[1] = str(pos2)
+                    if caja in fila:
+                        pos3 = int(fila[1])      
+                        pos3 -= 3
+                        fila[1] = str(pos3)
+            with open(archivoInventario,'w', newline = '') as archivo:
+                escritor = csv.writer(archivo, delimiter = ';')
+                escritor.writerows(datos)
+        
+            
 
 # prubaGastoCliente = input("Ingrese el id: ")
 # pruebaGastoCliente = gastoTotalCliente(listaVentas, prubaGastoCliente)
@@ -223,5 +313,3 @@ else:
 print("Gracias por visitar la app de nuestra pizzeria, vuelve pronto :)")
 # for fila in listaClientes:
 #     print(', '.join(fila))
-
-print("Angelo es tremendo marico")
