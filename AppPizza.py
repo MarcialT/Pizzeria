@@ -555,7 +555,7 @@ def cuatroQuesos(archivoInventario, factura):
     return factura
 
 def bebidas(archivoInventario, factura):
-    opcion_bebida = input("Que bebida desea agregar a su pedido?\n1.-Coca-Cola\n2.-Pepsi\n3.-Frescolita\n4.-7up\n5.-Finalizar pedido\n")
+    opcion_bebida = input("Que bebida desea agregar a su pedido?\n1.-Coca-Cola (2$)\n2.-Pepsi (2$)\n3.-Frescolita (2$)\n4.-7up (2$)\n5.-Finalizar pedido de bebidas\n")
     while opcion_bebida != "5":
         if opcion_bebida == "1":
             cantidad_bebidas = input("Ingrese el numero de Coca-Cola a pedir: ")
@@ -569,7 +569,7 @@ def bebidas(archivoInventario, factura):
                 for linea in lista:
                     if bebida in linea:
                         pos = int(linea[1])
-                        pos -= 1*contBebidas
+                        pos -= contBebidas
                         linea[1] = str(pos)
             with open(archivoInventario, 'w', newline = '') as archivo:
                 escritor = csv.writer(archivo, delimiter = ';')
@@ -588,7 +588,7 @@ def bebidas(archivoInventario, factura):
                 for linea in lista:
                     if bebida in linea:
                         pos = int(linea[1])
-                        pos -= 1*contBebidas
+                        pos -= contBebidas
                         linea[1] = str(pos)
             with open(archivoInventario, 'w', newline = '') as archivo:
                 escritor = csv.writer(archivo, delimiter = ';')
@@ -607,7 +607,7 @@ def bebidas(archivoInventario, factura):
                 for linea in lista:
                     if bebida in linea:
                         pos = int(linea[1])
-                        pos -= 1*contBebidas
+                        pos -= contBebidas
                         linea[1] = str(pos)
             with open(archivoInventario, 'w', newline = '') as archivo:
                 escritor = csv.writer(archivo, delimiter = ';')
@@ -626,7 +626,7 @@ def bebidas(archivoInventario, factura):
                 for linea in lista:
                     if bebida in linea:
                         pos = int(linea[1])
-                        pos -= 1*contBebidas
+                        pos -= contBebidas
                         linea[1] = str(pos)
             with open(archivoInventario, 'w', newline = '') as archivo:
                 escritor = csv.writer(archivo, delimiter = ';')
@@ -634,9 +634,98 @@ def bebidas(archivoInventario, factura):
             factura += 2*contBebidas
             opcion_bebida = "5"
         else:
-            opcion_bebida = input("Ingrese una opcion valida por favor...\n1.-Coca-Cola\n2.-Pepsi\n3.-Frescolita\n4.-7up\n5.-Finalizar pedido\n")
+            opcion_bebida = input("Ingrese una opcion valida por favor...\n\n1.-Coca-Cola (2$)\n2.-Pepsi (2$)\n3.-Frescolita (2$)\n4.-7up (2$)\n5.-Finalizar pedido de bebidas\n")
     return factura
-                
+
+def postres(archivoInventario, factura):
+    opcion_postre = input("Cual postre desea agregar a su pedido?\n1.-Quesillo (3.50$)\n2.-Torta de Chocolate (3.75$)\n3.-Pie de Limón (3.50$)\n4.-Torta Tres Leches (4$)\n5.-Finalizar pedido\n")
+    verificar_opcion_postre = valor_numerico(opcion_postre)
+    opcion_postre_verificada = verificar_opcion_postre
+    while opcion_postre_verificada != "5":
+        if opcion_postre_verificada == "1":
+            cant_postre = input("Cuantos quesillos desea agregar a su orden? ")
+            verificar_cant_postre = valor_numerico(cant_postre)
+            cant_postre_verificada = verificar_cant_postre
+            contPostre = int(cant_postre_verificada)
+            with open(archivoInventario, 'r') as archivo:
+                contenido = csv.reader(archivo, delimiter = ';')
+                lista = list(contenido)
+                postre = "quesillo"
+                for linea in lista:
+                    if postre in linea:
+                        pos = int(linea[1])
+                        pos -= contPostre
+                        linea[1] = str(pos)
+            with open(archivoInventario, 'w', newline = '') as archivo:
+                escritor = csv.writer(archivo, delimiter = ';')
+                escritor.writerows(lista)
+            factura += 3.50*contPostre
+            opcion_postre_verificada = "5"
+
+        elif opcion_postre_verificada == "2":
+            cant_postre = input("Cuantos quesillos desea agregar a su orden? ")
+            verificar_cant_postre = valor_numerico(cant_postre)
+            cant_postre_verificada = verificar_cant_postre
+            contPostre = int(cant_postre_verificada)
+            with open(archivoInventario, 'r') as archivo:
+                contenido = csv.reader(archivo, delimiter = ';')
+                lista = list(contenido)
+                postre = "tortaChocolate"
+                for linea in lista:
+                    if postre in linea:
+                        pos = int(linea[1])
+                        pos -= contPostre
+                        linea[1] = str(pos)
+            with open(archivoInventario, 'w', newline = '') as archivo:
+                escritor = csv.writer(archivo, delimiter = ';')
+                escritor.writerows(lista)
+            factura += 3.75*contPostre
+            opcion_postre_verificada = "5"
+        
+        elif opcion_postre_verificada == "3":
+            cant_postre = input("Cuantos quesillos desea agregar a su orden? ")
+            verificar_cant_postre = valor_numerico(cant_postre)
+            cant_postre_verificada = verificar_cant_postre
+            contPostre = int(cant_postre_verificada)
+            with open(archivoInventario, 'r') as archivo:
+                contenido = csv.reader(archivo, delimiter = ';')
+                lista = list(contenido)
+                postre = "pieDeLimon"
+                for linea in lista:
+                    if postre in linea:
+                        pos = int(linea[1])
+                        pos -= contPostre
+                        linea[1] = str(pos)
+            with open(archivoInventario, 'w', newline = '') as archivo:
+                escritor = csv.writer(archivo, delimiter = ';')
+                escritor.writerows(lista)
+            factura += 3.50*contPostre
+            opcion_postre_verificada = "5"
+
+        elif opcion_postre_verificada == "4":
+            cant_postre = input("Cuantos quesillos desea agregar a su orden? ")
+            verificar_cant_postre = valor_numerico(cant_postre)
+            cant_postre_verificada = verificar_cant_postre
+            contPostre = int(cant_postre_verificada)
+            with open(archivoInventario, 'r') as archivo:
+                contenido = csv.reader(archivo, delimiter = ';')
+                lista = list(contenido)
+                postre = "tortaTresLeches"
+                for linea in lista:
+                    if postre in linea:
+                        pos = int(linea[1])
+                        pos -= contPostre
+                        linea[1] = str(pos)
+            with open(archivoInventario, 'w', newline = '') as archivo:
+                escritor = csv.writer(archivo, delimiter = ';')
+                escritor.writerows(lista)
+            factura += 4*contPostre
+            opcion_postre_verificada = "5"
+
+        else:
+            opcion_postre_verificada = input("Opcion invalida...\n\nCual postre desea agregar a su pedido?\n1.-Quesillo (3.50$)\n2.-Torta de Chocolate (3.75$)\n3.-Pie de Limón (3.50$)\n4.-Torta Tres Leches (4$)\n5.-Finalizar pedido\n")
+    return factura
+
 # prubaGastoCliente = input("Ingrese el id: ")
 # pruebaGastoCliente = gastoTotalCliente(listaVentas, prubaGastoCliente)
 # print(pruebaGastoCliente)
@@ -660,23 +749,23 @@ if opcion_trabajador_cliente == "1":
             idIngreso = input("Ingrese su Id por favor: ")
             verificarCliente = buscarClientePorId(listaClientes, idIngreso)
             if verificarCliente:
-                opcion_pedido = input(f"Hola {verificarCliente.nombre}, cual es su pedido?\n1.-Pizza Napolitana\n2.-Pizza Pepperoni\n3.-Pizza Cuatro Quesos\n4.-Calzone\n5.-Finalizar pedido\n")
+                opcion_pedido = input(f"Hola {verificarCliente.nombre}, cual es su pedido?\n1.-Pizza Napolitana\n2.-Pizza Pepperoni\n3.-Pizza Cuatro Quesos\n4.-Calzone\n5.-Finalizar pedido de pizzas\n")
                 factura = 0
                 while opcion_pedido != "5":
                     if opcion_pedido == "1":
                         factura = pizzaNapolitana(archivoInventario, factura)
-                        opcion_pedido = input(f"Pizza agregada a su factura, el total a pagar es: {factura}$, desea agregar algun producto mas?\n1.-Pizza Napolitana\n2.-Pizza Pepperoni\n3.-Pizza Cuatro Quesos\n4.-Calzone\n5.-Finalizar pedido\n")
+                        opcion_pedido = input(f"Pizza agregada a su factura, el total a pagar es: {factura}$, desea agregar algun producto mas?\n1.-Pizza Napolitana\n2.-Pizza Pepperoni\n3.-Pizza Cuatro Quesos\n4.-Calzone\n5.-Finalizar pedido de pizzas\n")
                     elif opcion_pedido == "2":
                         factura = pizzaPepperoni(archivoInventario, factura)
-                        opcion_pedido = input(f"Pizza agregada a su factura, el total a pagar es: {factura}$, desea agregar algun producto mas?\n1.-Pizza Napolitana\n2.-Pizza Pepperoni\n3.-Pizza Cuatro Quesos\n4.-Calzone\n5.-Finalizar pedido\n")
+                        opcion_pedido = input(f"Pizza agregada a su factura, el total a pagar es: {factura}$, desea agregar algun producto mas?\n1.-Pizza Napolitana\n2.-Pizza Pepperoni\n3.-Pizza Cuatro Quesos\n4.-Calzone\n5.-Finalizar pedido de pizzas\n")
                     elif opcion_pedido == "3":
                         factura = cuatroQuesos(archivoInventario, factura)
-                        opcion_pedido = input(f"Pizza agregada a su factura, el total a pagar es: {factura}$, desea agregar algun producto mas?\n1.-Pizza Napolitana\n2.-Pizza Pepperoni\n3.-Pizza Cuatro Quesos\n4.-Calzone\n5.-Finalizar pedido\n")
+                        opcion_pedido = input(f"Pizza agregada a su factura, el total a pagar es: {factura}$, desea agregar algun producto mas?\n1.-Pizza Napolitana\n2.-Pizza Pepperoni\n3.-Pizza Cuatro Quesos\n4.-Calzone\n5.-Finalizar pedido de pizzas\n")
                     elif opcion_pedido == "4":
                         factura = calzone(archivoInventario, factura)
-                        opcion_pedido = input(f"Calzone agregado a su factura, el total a pagar es: {factura}$, desea agregar algun producto mas?\n1.-Pizza Napolitana\n2.-Pizza Pepperoni\n3.-Pizza Cuatro Quesos\n4.-Calzone\n5.-Finalizar pedido\n")
+                        opcion_pedido = input(f"Calzone agregado a su factura, el total a pagar es: {factura}$, desea agregar algun producto mas?\n1.-Pizza Napolitana\n2.-Pizza Pepperoni\n3.-Pizza Cuatro Quesos\n4.-Calzone\n5.-Finalizar pedido de pizzas\n")
                     else:
-                        opcion_pedido = input(f"Ingrese una opcion valida, el total a pagar es: {factura}$, desea agregar algun producto mas?\n1.-Pizza Napolitana\n2.-Pizza Pepperoni\n3.-Pizza Cuatro Quesos\n4.-Calzone\n5.-Finalizar pedido\n")
+                        opcion_pedido = input(f"Ingrese una opcion valida, el total a pagar es: {factura}$, desea agregar algun producto mas?\n1.-Pizza Napolitana\n2.-Pizza Pepperoni\n3.-Pizza Cuatro Quesos\n4.-Calzone\n5.-Finalizar pedido de pizzas\n")
                 quiere_bebida = input("Desea agregar una bebida a su pedido?\n1.-Si\n2.-No\n")
                 verificar_quiere_bebida = valor_numerico(quiere_bebida)
                 quiere_bebida_verificada = verificar_quiere_bebida
@@ -686,7 +775,23 @@ if opcion_trabajador_cliente == "1":
                         quiere_bebida_verificada = input(f"Bebida agregada a su factura, el total a pagar es: {factura}$, desea agregar otra bebida?\n1.-Si\n2.-No\n")
                     else:
                         quiere_bebida_verificada = input("Ingrese una opcion valida...\n\nDesea agregar una bebida a su pedido?\n1.-Si\n2.-No\n")
-                break #^ Aun no terminado
+                quiere_postre = input("Desea agregar un postre a su pedido?\n1.-Si\n2.-No\n")
+                verificar_quiere_postre = valor_numerico(quiere_postre)
+                quiere_postre_verificada = verificar_quiere_postre
+                while quiere_postre_verificada != "2":
+                    if quiere_postre_verificada == "1":
+                        factura = postres(archivoInventario, factura)
+                        quiere_postre_verificada = input(f"Postre agregado a su factura, el total a pagar es: {factura}$, desea agregar otro postre?\n1.-Si\n2.-No\n")
+                    else:
+                        quiere_postre_verificada = input("Ingrese una opcion valida...\n\nDesea agregar un postre a su pedido?\n1.-Si\n2.-No\n")
+                print(f"El total a pagar es: {factura}$\n")
+                pago = input("Ya hizo el pago?\n1.-Si\n2.-No\n")
+                verificar_pago = valor_numerico(pago)
+                pago_verificado = verificar_pago
+                while pago_verificado != "1":
+                    pago_verificado = input(f"\nPara continuar debe realizar el pago de {factura}...\n\nYa hizo el pago?\n1.-Si\n2.-No\n")
+                print("Recibido, gracias por su compra, muy buen provecho ;)")
+                break
             else:
                 opcionRegistro = input("Id no encontrado, desea registrarse?\n\n1.-Si\n2.-No\n")
                 verificar_opcion_registro = valor_numerico(opcionRegistro)
