@@ -14,8 +14,9 @@ import os # Libreria para eliminar archivos
 archivoClientes = 'clientes.csv'
 archivoVentas = 'ventas.csv'
 archivoInventario = 'inventario.csv'
+archivoCapital = 'capital.csv'
 
-capital = 0
+capital = 4000
 
 class Clientes:
     def __init__(self, idCliente, nombre, apellido, email):
@@ -736,6 +737,14 @@ def postres(archivoInventario, factura):
             opcion_postre_verificada = input("Opcion invalida...\n\nCual postre desea agregar a su pedido?\n1.-Quesillo (3.50$)\n2.-Torta de Chocolate (3.75$)\n3.-Pie de Limón (3.50$)\n4.-Torta Tres Leches (4$)\n5.-Finalizar pedido\n")
     return factura
 
+def capitalActual(archivoCapital):
+    with open(archivoCapital, 'r') as archivo:
+        contenido = csv.reader(archivo,delimiter=';')
+        lista = list(contenido)
+        lista2 = list(lista[0])
+        capital = lista2[1]
+    print(f"El capital de la pizzeria es: {capital}")
+
 # prubaGastoCliente = input("Ingrese el id: ")
 # pruebaGastoCliente = gastoTotalCliente(listaVentas, prubaGastoCliente)
 # print(pruebaGastoCliente)
@@ -834,7 +843,7 @@ elif opcion_trabajador_cliente == "2":
     opcion_trabajador_verificada = opcion_trabajador_verificar
     while opcion_trabajador_verificada != "7":
         if opcion_trabajador_verificada == "1":
-            print("El capital actual es:",capital) #^ Esta opcion aun esta incompleta ya que se debe acordar como se va a guardar el capital, esto es un mero ejemplo
+            capitalActual(archivoCapital)
             opcion_trabajador_verificada = input("Desea hacer algo mas?\n1.-Mostrar el capital actual de la pizzeria\n2.-Mostrar el nombre de un cliente y cuanto gasto\n3.-Mostrar cuanto queda de algun ingrediente\n4.-Modificar archivo de clientes o ventas\n5.-Mostrar total de propinas\n6.-Mostrar total de ganancias\n7.-Salir\n")
         
         elif opcion_trabajador_verificada == "2":
