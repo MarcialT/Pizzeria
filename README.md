@@ -14,6 +14,4 @@ Los requisitos para el programa son los siguientes:
 
 Modificaciones:
 
--Cambiar la identificacion del usuario de ID a nombre de usuario (agregar un nombre de usuario a cada cliente, modificar la clase Clientes, editar las funciones que utilice los clientes, modificar el archivo de clientes.csv con los datos que sean necesarios)
-
 -Modificar el registro del cliente a que primero pregunte si ya esta registrado o si desea registrarse, si ya esta registrado, pedir que se identifique con su correo electronico, si desea registrarse, realizar la operacion de registro
