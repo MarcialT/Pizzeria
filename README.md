@@ -10,3 +10,10 @@ Los requisitos para el programa son los siguientes:
 6.- Mostrar el total de las propinas (completado)
 7.- Permitir el registro de un usuario(completado)
 8.- Permitir a la pizzeria realizar compras para el inventario
+9.- Realizar arquitectura MVC
+
+Modificaciones:
+
+-Cambiar la identificacion del usuario de ID a nombre de usuario (agregar un nombre de usuario a cada cliente, modificar la clase Clientes, editar las funciones que utilice los clientes, modificar el archivo de clientes.csv con los datos que sean necesarios)
+
+-Modificar el registro del cliente a que primero pregunte si ya esta registrado o si desea registrarse, si ya esta registrado, pedir que se identifique con su correo electronico, si desea registrarse, realizar la operacion de registro
