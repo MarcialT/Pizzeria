@@ -133,7 +133,7 @@ def gastoTotalCliente(listaVentas,archivoClientes, idClienteVenta):
     print("\n{} se ha gastado {} dolares en la pizzeria\n".format(nombre,contGasto))        
 
 def pizzaNapolitana(archivoInventario, factura):
-    elegir_tamaño = input("\nIngrese el tamaño de su Pizza Napolitana :)\n1-Tamaño personal\n2-Tamaño mediano\n3-Tamaño familiar\n")
+    elegir_tamaño = input("\nIngrese el tamaño de su Pizza Napolitana :)\n1-Tamaño personal (6.50$)\n2-Tamaño mediano (8$)\n3-Tamaño familiar (10$)\n")
     if elegir_tamaño == "1":
         factura += 6.50
         with open(archivoInventario,'r') as archivo:
@@ -246,7 +246,7 @@ def pizzaNapolitana(archivoInventario, factura):
     return factura
 
 def pizzaPepperoni(archivoInventario, factura):
-    elegir_tamaño = input("\nIngrese el tamaño de su Pizza Pepperoni :)\n1-Tamaño personal\n2-Tamaño mediano\n3-Tamaño familiar\n")
+    elegir_tamaño = input("\nIngrese el tamaño de su Pizza Pepperoni :)\n1-Tamaño personal (7.50$)\n2-Tamaño mediano (9.50$)\n3-Tamaño familiar (12$)\n")
     if elegir_tamaño == "1":
         factura += 7.50
         with open(archivoInventario,'r') as archivo:
@@ -376,6 +376,9 @@ def calzone(archivoInventario, factura):
     with open(archivoInventario,'r') as archivo:
         contenido = csv.reader(archivo, delimiter = ';')
         datos = list(contenido)
+        ingredientes = [linea[0] for linea in datos]
+        while eleccion_ingrediente not in ingredientes:
+            eleccion_ingrediente = input("Ingrediente no encontrado, ingrese uno valido: ")
         masa = "masa"
         salsa = "salsa"
         queso = "mozzarella"
@@ -388,6 +391,7 @@ def calzone(archivoInventario, factura):
                 pos = int(linea[1])
                 pos -= 1
                 linea[1] = str(pos)
+                
             if masa in linea:
                 pos1 = int(linea[1])
                 pos1 -= 1
@@ -407,14 +411,15 @@ def calzone(archivoInventario, factura):
             if servilleta in linea:
                 pos5 = int(linea[1])
                 pos5 -= 1
-                linea[1] = str(pos5)   
+                linea[1] = str(pos5)
+               
     with open(archivoInventario, 'w', newline = '') as archivo:
         escritor = csv.writer(archivo, delimiter = ';')
         escritor.writerows(datos)
     return factura
 
 def cuatroQuesos(archivoInventario, factura):
-    elegir_tamaño = input("\nIngrese el tamaño de su pizza Cuatro Quesos\n1-Tamaño personal\n2-Tamaño mediano\n3-Tamaño familiar\n").lower()
+    elegir_tamaño = input("\nIngrese el tamaño de su pizza Cuatro Quesos\n1-Tamaño personal (8.50$)\n2-Tamaño mediano (11$)\n3-Tamaño familiar (13.50$)\n").lower()
     factura += 8.50
     if elegir_tamaño == "1":
         with open(archivoInventario,'r') as archivo:
@@ -765,61 +770,83 @@ if opcion_trabajador_cliente == "1":
     opcion_verificada_cliente = verificar_opcion_cliente
     while opcion_verificada_cliente != "2":
         if opcion_verificada_cliente == "1":
-            email = input("Ingrese su email por favor: ")
-            verificarCliente = buscarClientePorCorreo(listaClientes, email)
-            if verificarCliente:
-                opcion_pedido = input(f"Hola {verificarCliente.nombre}, cual es su pedido?\n1.-Pizza Napolitana\n2.-Pizza Pepperoni\n3.-Pizza Cuatro Quesos\n4.-Calzone\n5.-Finalizar pedido de pizzas\n")
-                factura = 0
-                while opcion_pedido != "5":
-                    if opcion_pedido == "1":
-                        factura = pizzaNapolitana(archivoInventario, factura)
-                        opcion_pedido = input(f"Pizza agregada a su factura, el total a pagar es: {factura}$, desea agregar algun producto mas?\n1.-Pizza Napolitana\n2.-Pizza Pepperoni\n3.-Pizza Cuatro Quesos\n4.-Calzone\n5.-Finalizar pedido de pizzas\n")
-                    elif opcion_pedido == "2":
-                        factura = pizzaPepperoni(archivoInventario, factura)
-                        opcion_pedido = input(f"Pizza agregada a su factura, el total a pagar es: {factura}$, desea agregar algun producto mas?\n1.-Pizza Napolitana\n2.-Pizza Pepperoni\n3.-Pizza Cuatro Quesos\n4.-Calzone\n5.-Finalizar pedido de pizzas\n")
-                    elif opcion_pedido == "3":
-                        factura = cuatroQuesos(archivoInventario, factura)
-                        opcion_pedido = input(f"Pizza agregada a su factura, el total a pagar es: {factura}$, desea agregar algun producto mas?\n1.-Pizza Napolitana\n2.-Pizza Pepperoni\n3.-Pizza Cuatro Quesos\n4.-Calzone\n5.-Finalizar pedido de pizzas\n")
-                    elif opcion_pedido == "4":
-                        factura = calzone(archivoInventario, factura)
-                        opcion_pedido = input(f"Calzone agregado a su factura, el total a pagar es: {factura}$, desea agregar algun producto mas?\n1.-Pizza Napolitana\n2.-Pizza Pepperoni\n3.-Pizza Cuatro Quesos\n4.-Calzone\n5.-Finalizar pedido de pizzas\n")
-                    else:
-                        opcion_pedido = input(f"Ingrese una opcion valida, el total a pagar es: {factura}$, desea agregar algun producto mas?\n1.-Pizza Napolitana\n2.-Pizza Pepperoni\n3.-Pizza Cuatro Quesos\n4.-Calzone\n5.-Finalizar pedido de pizzas\n")
-                quiere_bebida = input("Desea agregar una bebida a su pedido?\n1.-Si\n2.-No\n")
-                verificar_quiere_bebida = valor_numerico(quiere_bebida)
-                quiere_bebida_verificada = verificar_quiere_bebida
-                while quiere_bebida_verificada != "2":
-                    if quiere_bebida_verificada == "1":
-                        factura = bebidas(archivoInventario, factura)
-                        quiere_bebida_verificada = input(f"Bebida agregada a su factura, el total a pagar es: {factura}$, desea agregar otra bebida?\n1.-Si\n2.-No\n")
-                    else:
-                        quiere_bebida_verificada = input("Ingrese una opcion valida...\n\nDesea agregar una bebida a su pedido?\n1.-Si\n2.-No\n")
-                quiere_postre = input("Desea agregar un postre a su pedido?\n1.-Si\n2.-No\n")
-                verificar_quiere_postre = valor_numerico(quiere_postre)
-                quiere_postre_verificada = verificar_quiere_postre
-                while quiere_postre_verificada != "2":
-                    if quiere_postre_verificada == "1":
-                        factura = postres(archivoInventario, factura)
-                        quiere_postre_verificada = input(f"Postre agregado a su factura, el total a pagar es: {factura}$, desea agregar otro postre?\n1.-Si\n2.-No\n")
-                    else:
-                        quiere_postre_verificada = input("Ingrese una opcion valida...\n\nDesea agregar un postre a su pedido?\n1.-Si\n2.-No\n")
-                if factura == 0:
-                    print("Usted no realizo ninguna compra, vayase pobre")
-                    break
-                elif factura > 0:
-                    print(f"El total a pagar es: {factura}$\n")
-                    pago = input("Ya hizo el pago?\n1.-Si\n2.-No\n")
-                    verificar_pago = valor_numerico(pago)
-                    pago_verificado = verificar_pago
-                    while pago_verificado != "1":
-                        pago_verificado = input(f"\nPara continuar debe realizar el pago de {factura}...\n\nYa hizo el pago?\n1.-Si\n2.-No\n")
-                    print("Recibido, gracias por su compra, muy buen provecho ;)")
-                    break
-            else:
-                opcionRegistro = input("Correo no encontrado, desea registrarse?\n\n1.-Si\n2.-No\n")
-                verificar_opcion_registro = valor_numerico(opcionRegistro)
-                opcion_registro_verificada = verificar_opcion_registro
-                if opcion_registro_verificada == "1":
+            esta_registrado = input("Usted ya esta registrado en nuestra app?\n1.-Si\n2.-No\n")
+            verificar_esta_registrado = valor_numerico(esta_registrado)
+            esta_registrado_verificado = verificar_esta_registrado
+            if esta_registrado_verificado == "1":
+                email = input("Ingrese su email por favor: ")
+                verificarCliente = buscarClientePorCorreo(listaClientes, email)
+                if verificarCliente:
+                    opcion_pedido = input(f"Hola {verificarCliente.nombre}, cual es su pedido?\n1.-Pizza Napolitana\n2.-Pizza Pepperoni\n3.-Pizza Cuatro Quesos\n4.-Calzone (5.50$)\n5.-Finalizar pedido de pizzas\n")
+                    factura = 0
+                    while opcion_pedido != "5":
+                        if opcion_pedido == "1":
+                            factura = pizzaNapolitana(archivoInventario, factura)
+                            opcion_pedido = input(f"Pizza agregada a su factura, el total a pagar es: {factura}$, desea agregar algun producto mas?\n1.-Pizza Napolitana\n2.-Pizza Pepperoni\n3.-Pizza Cuatro Quesos\n4.-Calzone (5.50$)\n5.-Finalizar pedido de pizzas\n")
+                        elif opcion_pedido == "2":
+                            factura = pizzaPepperoni(archivoInventario, factura)
+                            opcion_pedido = input(f"Pizza agregada a su factura, el total a pagar es: {factura}$, desea agregar algun producto mas?\n1.-Pizza Napolitana\n2.-Pizza Pepperoni\n3.-Pizza Cuatro Quesos\n4.-Calzone (5.50$)\n5.-Finalizar pedido de pizzas\n")
+                        elif opcion_pedido == "3":
+                            factura = cuatroQuesos(archivoInventario, factura)
+                            opcion_pedido = input(f"Pizza agregada a su factura, el total a pagar es: {factura}$, desea agregar algun producto mas?\n1.-Pizza Napolitana\n2.-Pizza Pepperoni\n3.-Pizza Cuatro Quesos\n4.-Calzone (5.50$)\n5.-Finalizar pedido de pizzas\n")
+                        elif opcion_pedido == "4":
+                            factura = calzone(archivoInventario, factura)
+                            opcion_pedido = input(f"Calzone agregado a su factura, el total a pagar es: {factura}$, desea agregar algun producto mas?\n1.-Pizza Napolitana\n2.-Pizza Pepperoni\n3.-Pizza Cuatro Quesos\n4.-Calzone (5.50$)\n5.-Finalizar pedido de pizzas\n")
+                        else:
+                            opcion_pedido = input(f"Ingrese una opcion valida, el total a pagar es: {factura}$, desea agregar algun producto mas?\n1.-Pizza Napolitana\n2.-Pizza Pepperoni\n3.-Pizza Cuatro Quesos\n4.-Calzone (5.50$)\n5.-Finalizar pedido de pizzas\n")
+                    quiere_bebida = input("Desea agregar una bebida a su pedido?\n1.-Si\n2.-No\n")
+                    verificar_quiere_bebida = valor_numerico(quiere_bebida)
+                    quiere_bebida_verificada = verificar_quiere_bebida
+                    while quiere_bebida_verificada != "2":
+                        if quiere_bebida_verificada == "1":
+                            factura = bebidas(archivoInventario, factura)
+                            quiere_bebida_verificada = input(f"Bebida agregada a su factura, el total a pagar es: {factura}$, desea agregar otra bebida?\n1.-Si\n2.-No\n")
+                        else:
+                            quiere_bebida_verificada = input("Ingrese una opcion valida...\n\nDesea agregar una bebida a su pedido?\n1.-Si\n2.-No\n")
+                    quiere_postre = input("Desea agregar un postre a su pedido?\n1.-Si\n2.-No\n")
+                    verificar_quiere_postre = valor_numerico(quiere_postre)
+                    quiere_postre_verificada = verificar_quiere_postre
+                    while quiere_postre_verificada != "2":
+                        if quiere_postre_verificada == "1":
+                            factura = postres(archivoInventario, factura)
+                            quiere_postre_verificada = input(f"Postre agregado a su factura, el total a pagar es: {factura}$, desea agregar otro postre?\n1.-Si\n2.-No\n")
+                        else:
+                            quiere_postre_verificada = input("Ingrese una opcion valida...\n\nDesea agregar un postre a su pedido?\n1.-Si\n2.-No\n")
+                    if factura == 0:
+                        print("Usted no realizo ninguna compra, vayase pobre")
+                        break
+                    elif factura > 0:
+                        print(f"El total a pagar es: {factura}$\n")
+                        pago = input("Ya hizo el pago?\n1.-Si\n2.-No\n")
+                        verificar_pago = valor_numerico(pago)
+                        pago_verificado = verificar_pago
+                        while pago_verificado != "1":
+                            pago_verificado = input(f"\nPara continuar debe realizar el pago de {factura}$...\n\nYa hizo el pago?\n1.-Si\n2.-No\n")
+                        print("Recibido, gracias por su compra, muy buen provecho ;)")
+                        break
+                else:
+                    opcionRegistro = input("Correo no encontrado, desea registrarse?\n\n1.-Si\n2.-No\n")
+                    verificar_opcion_registro = valor_numerico(opcionRegistro)
+                    opcion_registro_verificada = verificar_opcion_registro
+                    if opcion_registro_verificada == "1":
+                        ultimoId = encontrarUltimoIdClientes(archivoClientes)
+                        idNuevoUsuario = ultimoId + 1
+                        nombreNuevoUsuario = input("Ingrese su nombre: ")
+                        apellidoNuevoUsuario = input("Ingrese su apellido: ")
+                        emailNuevoUsuario = input("Ingrese su email: ")
+                        registroUsuario = open(archivoClientes, 'a')
+                        registroUsuario.write(f"{idNuevoUsuario};{nombreNuevoUsuario};{apellidoNuevoUsuario};{emailNuevoUsuario}\n")
+                        registroUsuario.close()
+                        print("\nUsted se ha registrado exitosamente :)")
+                        break
+                    elif opcion_registro_verificada == "2":
+                        print("Para poder realizar un pedido debe registrarse, hasta luego!!")
+                        break
+            elif esta_registrado_verificado == "2":
+                registrarse = input("Para realizar un pedido en nuestra app debe registrarse, desea hacerlo?\n1.-Si\n2.-No\n")
+                verificar_registrarse = valor_numerico(registrarse)
+                registrarse_verificado = verificar_registrarse
+                if registrarse_verificado == "1":
                     ultimoId = encontrarUltimoIdClientes(archivoClientes)
                     idNuevoUsuario = ultimoId + 1
                     nombreNuevoUsuario = input("Ingrese su nombre: ")
@@ -828,10 +855,10 @@ if opcion_trabajador_cliente == "1":
                     registroUsuario = open(archivoClientes, 'a')
                     registroUsuario.write(f"{idNuevoUsuario};{nombreNuevoUsuario};{apellidoNuevoUsuario};{emailNuevoUsuario}\n")
                     registroUsuario.close()
-                    print(f"\nUsted se ha registrado exitosamente, su id es: {idNuevoUsuario}")
+                    print("\nUsted se ha registrado exitosamente :)")
                     break
-                elif opcion_registro_verificada == "2":
-                    print("Para poder realizar un pedido debe registrarse, hasta luego!!")
+                elif registrarse_verificado == "2":
+                    print("Lo sentimos, registrese para poder pedir en nuestra app")
                     break
 
         elif opcion_verificada_cliente == "2":
