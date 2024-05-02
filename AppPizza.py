@@ -80,9 +80,9 @@ def leerArchivoVentas(archivoVentas):
 listaVentas = leerArchivoVentas(archivoVentas)    
 listaClientes = leerArchivoClientes(archivoClientes)
 
-def buscarClientePorId(listaClientes, idCliente):
+def buscarClientePorCorreo(listaClientes, email):
     for cliente in listaClientes:
-        if cliente.idCliente == idCliente:
+        if cliente.email == email:
             return cliente
     return None
         
@@ -744,7 +744,7 @@ def capitalActual(archivoCapital):
         lista2 = list(lista[0])
         capital = lista2[1]
     print(f"El capital de la pizzeria es: {capital}")
-
+# prubaGastoCliente = input("Ingrese el id: ")
 # prubaGastoCliente = input("Ingrese el id: ")
 # pruebaGastoCliente = gastoTotalCliente(listaVentas, prubaGastoCliente)
 # print(pruebaGastoCliente)
@@ -765,8 +765,8 @@ if opcion_trabajador_cliente == "1":
     opcion_verificada_cliente = verificar_opcion_cliente
     while opcion_verificada_cliente != "2":
         if opcion_verificada_cliente == "1":
-            idIngreso = input("Ingrese su Id por favor: ")
-            verificarCliente = buscarClientePorId(listaClientes, idIngreso)
+            email = input("Ingrese su email por favor: ")
+            verificarCliente = buscarClientePorCorreo(listaClientes, email)
             if verificarCliente:
                 opcion_pedido = input(f"Hola {verificarCliente.nombre}, cual es su pedido?\n1.-Pizza Napolitana\n2.-Pizza Pepperoni\n3.-Pizza Cuatro Quesos\n4.-Calzone\n5.-Finalizar pedido de pizzas\n")
                 factura = 0
@@ -803,16 +803,20 @@ if opcion_trabajador_cliente == "1":
                         quiere_postre_verificada = input(f"Postre agregado a su factura, el total a pagar es: {factura}$, desea agregar otro postre?\n1.-Si\n2.-No\n")
                     else:
                         quiere_postre_verificada = input("Ingrese una opcion valida...\n\nDesea agregar un postre a su pedido?\n1.-Si\n2.-No\n")
-                print(f"El total a pagar es: {factura}$\n")
-                pago = input("Ya hizo el pago?\n1.-Si\n2.-No\n")
-                verificar_pago = valor_numerico(pago)
-                pago_verificado = verificar_pago
-                while pago_verificado != "1":
-                    pago_verificado = input(f"\nPara continuar debe realizar el pago de {factura}...\n\nYa hizo el pago?\n1.-Si\n2.-No\n")
-                print("Recibido, gracias por su compra, muy buen provecho ;)")
-                break
+                if factura == 0:
+                    print("Usted no realizo ninguna compra, vayase pobre")
+                    break
+                elif factura > 0:
+                    print(f"El total a pagar es: {factura}$\n")
+                    pago = input("Ya hizo el pago?\n1.-Si\n2.-No\n")
+                    verificar_pago = valor_numerico(pago)
+                    pago_verificado = verificar_pago
+                    while pago_verificado != "1":
+                        pago_verificado = input(f"\nPara continuar debe realizar el pago de {factura}...\n\nYa hizo el pago?\n1.-Si\n2.-No\n")
+                    print("Recibido, gracias por su compra, muy buen provecho ;)")
+                    break
             else:
-                opcionRegistro = input("Id no encontrado, desea registrarse?\n\n1.-Si\n2.-No\n")
+                opcionRegistro = input("Correo no encontrado, desea registrarse?\n\n1.-Si\n2.-No\n")
                 verificar_opcion_registro = valor_numerico(opcionRegistro)
                 opcion_registro_verificada = verificar_opcion_registro
                 if opcion_registro_verificada == "1":

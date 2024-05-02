@@ -1,4 +1,4 @@
-ID de venta;ID del cliente;Dinero gastado;Orden;Propina
+ID de venta;ID del cliente;Dinero gastado;nombrePizza;Propina
 1;15;12.50;Napolitana;5.50
 2;3;15.75;Calzone;3.75
 3;9;12.50;Napolitana;2.30
