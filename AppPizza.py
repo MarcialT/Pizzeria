@@ -750,24 +750,30 @@ def capitalActual(archivoCapital):
         capital = lista2[1]
     print(f"El capital de la pizzeria es: {capital}")
 
-def comprarIngredientes(archivoInventario):
+def comprarIngredientes(archivoInventario,archivoCapital):
     opcion = ""
     while opcion != "2":
         opcion = input("Que desea hacer?\n1-Comprar ingrediente\n2-Salir\n")
         if opcion == "1":
             eleccion_ingrediente = input("Ingrese el ingrediente a comprar: ")
             cantidad_a_comprar = int(input("\nIngrese la cantidad a comprar de ese ingrediente: "))
-            with open(archivoInventario,'r') as archivo:
+            with open(archivoInventario,'r') as archivo, open(archivoCapital,'r') as archivo2:
                 contenido = csv.reader(archivo,delimiter=';')
+                contenido2 = csv.reader(archivo2,delimiter=';')
                 lista = list(contenido)
+                lista2 = list(contenido2)
                 for linea in lista:
                     if eleccion_ingrediente == linea[0]:
-                        pos = int(linea[1])
-                        pos += cantidad_a_comprar
-                        linea[1] = str(pos)
-            with open(archivoInventario, 'w', newline='') as archivo:
-                lector = csv.writer(archivo,delimiter=';')   
-                lector.writerows(lista)
+                        linea[1] = str(int(linea[1]) + cantidad_a_comprar)
+                        precio_ingrediente = float(linea[2])
+                        for linea2 in lista2:
+                            capital_actual = float(linea2[1]) - (precio_ingrediente*cantidad_a_comprar)
+                            linea2[1] = str(float(capital_actual))
+            with open(archivoInventario, 'w', newline='') as archivo, open(archivoCapital, 'w',newline='') as archivo2:
+                escritor = csv.writer(archivo,delimiter=';')   
+                escritor.writerows(lista)
+                escritor2 = csv.writer(archivo2,delimiter=';')   
+                escritor2.writerows(lista2)
         else:
             break                            
 # prubaGastoCliente = input("Ingrese el id: ")
@@ -924,7 +930,7 @@ elif opcion_trabajador_cliente == "2":
             opcion_trabajador_verificada = input("Desea hacer algo mas?\n1.-Mostrar el capital actual de la pizzeria\n2.-Mostrar cuanto gasto un cliente\n3.-Mostrar cuanto queda de algun ingrediente\n4.-Modificar archivo de clientes o ventas\n5.-Mostrar total de propinas\n6.-Mostrar total de ganancias\n7.-Comprar ingredientes\n8.-Salir\n")
 
         elif opcion_trabajador_verificada == "7":
-            comprarIngredientes(archivoInventario)
+            comprarIngredientes(archivoInventario,archivoCapital)
             opcion_trabajador_verificada = input("Desea hacer algo mas?\n1.-Mostrar el capital actual de la pizzeria\n2.-Mostrar cuanto gasto un cliente\n3.-Mostrar cuanto queda de algun ingrediente\n4.-Modificar archivo de clientes o ventas\n5.-Mostrar total de propinas\n6.-Mostrar total de ganancias\n7.-Comprar ingredientes\n8.-Salir\n")
 
         elif opcion_trabajador_verificada == "8":
