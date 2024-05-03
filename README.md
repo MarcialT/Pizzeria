@@ -9,7 +9,7 @@ Los requisitos para el programa son los siguientes:
 5.- Que deje agregar y eliminar un cliente o una venta
 6.- Mostrar el total de las propinas (completado)
 7.- Permitir el registro de un usuario(completado)
-8.- Permitir a la pizzeria realizar compras para el inventario
+8.- Permitir a la pizzeria realizar compras para el inventario(Falta que la compra se reste al capital)
 9.- Realizar arquitectura MVC
 
 Modificaciones:

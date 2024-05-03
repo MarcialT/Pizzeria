@@ -749,6 +749,27 @@ def capitalActual(archivoCapital):
         lista2 = list(lista[0])
         capital = lista2[1]
     print(f"El capital de la pizzeria es: {capital}")
+
+def comprarIngredientes(archivoInventario):
+    opcion = ""
+    while opcion != "2":
+        opcion = input("Que desea hacer?\n1-Comprar ingrediente\n2-Salir\n")
+        if opcion == "1":
+            eleccion_ingrediente = input("Ingrese el ingrediente a comprar: ")
+            cantidad_a_comprar = int(input("\nIngrese la cantidad a comprar de ese ingrediente: "))
+            with open(archivoInventario,'r') as archivo:
+                contenido = csv.reader(archivo,delimiter=';')
+                lista = list(contenido)
+                for linea in lista:
+                    if eleccion_ingrediente == linea[0]:
+                        pos = int(linea[1])
+                        pos += cantidad_a_comprar
+                        linea[1] = str(pos)
+            with open(archivoInventario, 'w', newline='') as archivo:
+                lector = csv.writer(archivo,delimiter=';')   
+                lector.writerows(lista)
+        else:
+            break                            
 # prubaGastoCliente = input("Ingrese el id: ")
 # prubaGastoCliente = input("Ingrese el id: ")
 # pruebaGastoCliente = gastoTotalCliente(listaVentas, prubaGastoCliente)
