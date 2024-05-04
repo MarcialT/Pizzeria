@@ -15,3 +15,5 @@ Los requisitos para el programa son los siguientes:
 Modificaciones:
 
 -Modificar el registro del cliente a que primero pregunte si ya esta registrado o si desea registrarse, si ya esta registrado, pedir que se identifique con su correo electronico, si desea registrarse, realizar la operacion de registro(completado)
+
+-Cuando se realice una venta, que se agregue al archivo venta si es de un cliente no registrado, si ya esta registrado que se le sume a dinero gastado del cliente en la pizzeria la venta
