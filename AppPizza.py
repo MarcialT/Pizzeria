@@ -775,7 +775,38 @@ def comprarIngredientes(archivoInventario,archivoCapital):
                 escritor2 = csv.writer(archivo2,delimiter=';')   
                 escritor2.writerows(lista2)
         else:
-            break                            
+            break                 
+        
+def eliminarCliente(archivoClientes):
+    opcion = input("Ingrese el id del cliente que desea eliminar: ")
+    with open(archivoClientes,'r') as archivo:
+        contenido = csv.reader(archivo,delimiter=';')
+        lista = list(contenido)
+        if int(opcion) > (len(lista)-1):
+            while int(opcion) > (len(lista)-1):
+                print("\nCliente no encontrado\n")
+                opcion = input("Ingrese el id del cliente que desea eliminar: ")
+        lista = [ linea for linea in lista if opcion != linea[0]]
+    with open(archivoClientes,'w',newline='') as archivo:
+        lector = csv.writer(archivo,delimiter=';')
+        lector.writerows(lista)    
+    print("\nCliente eliminado\n")    
+
+def eliminarVenta(archivoVentas):
+    opcion = input("Ingrese el id de la venta que desea eliminar: ")
+    with open(archivoVentas,'r') as archivo:
+        contenido = csv.reader(archivo,delimiter=';')
+        lista = list(contenido)
+        if int(opcion) > (len(lista)-1):
+            while int(opcion) > (len(lista)-1):
+                print("\nVenta no encontrada\n")
+                opcion = input("Ingrese el id de la venta que desea eliminar: ")
+        lista = [ linea for linea in lista if opcion != linea[0]]
+    with open(archivoVentas,'w',newline='') as archivo:
+        lector = csv.writer(archivo,delimiter=';')
+        lector.writerows(lista)    
+    print("\nCliente eliminado\n")
+                                                     
 # prubaGastoCliente = input("Ingrese el id: ")
 # prubaGastoCliente = input("Ingrese el id: ")
 # pruebaGastoCliente = gastoTotalCliente(listaVentas, prubaGastoCliente)
@@ -896,49 +927,53 @@ if opcion_trabajador_cliente == "1":
             opcion_verificada_cliente = input("Que desea hacer?\n1.-Realizar un pedido\n2.-Salir\n")
 
 elif opcion_trabajador_cliente == "2":
-    opcion_trabajador = input("Que desea hacer el dia de hoy?\n1.-Mostrar el capital actual de la pizzeria\n2.-Mostrar el nombre de un cliente y cuanto gasto\n3.-Mostrar cuanto queda de algun ingrediente\n4.-Modificar archivo de clientes o ventas\n5.-Mostrar total de propinas\n6.-Mostrar total de ganancias\n7.-Comprar ingredientes\n8.-Salir\n")
+    opcion_trabajador = input("Que desea hacer el dia de hoy?\n1.-Mostrar el capital actual de la pizzeria\n2.-Mostrar el nombre de un cliente y cuanto gasto\n3.-Mostrar cuanto queda de algun ingrediente\n4.-Eliminar cliente o venta\n5.-Mostrar total de propinas\n6.-Mostrar total de ganancias\n7.-Comprar ingredientes\n8.-Salir\n")
     opcion_trabajador_verificar = valor_numerico(opcion_trabajador)
     opcion_trabajador_verificada = opcion_trabajador_verificar
     while opcion_trabajador_verificada != "8":
         if opcion_trabajador_verificada == "1":
             capitalActual(archivoCapital)
-            opcion_trabajador_verificada = input("Desea hacer algo mas?\n1.-Mostrar el capital actual de la pizzeria\n2.-Mostrar el nombre de un cliente y cuanto gasto\n3.-Mostrar cuanto queda de algun ingrediente\n4.-Modificar archivo de clientes o ventas\n5.-Mostrar total de propinas\n6.-Mostrar total de ganancias\n7.-Comprar ingredientes\n8.-Salir\n")
+            opcion_trabajador_verificada = input("Desea hacer algo mas?\n1.-Mostrar el capital actual de la pizzeria\n2.-Mostrar el nombre de un cliente y cuanto gasto\n3.-Mostrar cuanto queda de algun ingrediente\n4.-Eliminar cliente o venta\n5.-Mostrar total de propinas\n6.-Mostrar total de ganancias\n7.-Comprar ingredientes\n8.-Salir\n")
         
         elif opcion_trabajador_verificada == "2":
             id_buscar_gasto = input("Ingrese el Id del cliente para buscar su gasto total: ")
             id_buscar_gasto_verificar = valor_numerico(id_buscar_gasto)
             id_buscar_gasto_verificada = id_buscar_gasto_verificar
             gastoTotalCliente(listaVentas, archivoClientes,id_buscar_gasto_verificada)
-            opcion_trabajador_verificada = input("Desea hacer algo mas?\n1.-Mostrar el capital actual de la pizzeria\n2.-Mostrar cuanto gasto un cliente\n3.-Mostrar cuanto queda de algun ingrediente\n4.-Modificar archivo de clientes o ventas\n5.-Mostrar total de propinas\n6.-Mostrar total de ganancias\n7.-Comprar ingredientes\n8.-Salir\n")
+            opcion_trabajador_verificada = input("Desea hacer algo mas?\n1.-Mostrar el capital actual de la pizzeria\n2.-Mostrar cuanto gasto un cliente\n3.-Mostrar cuanto queda de algun ingrediente\n4.-Eliminar cliente o venta\n5.-Mostrar total de propinas\n6.-Mostrar total de ganancias\n7.-Comprar ingredientes\n8.-Salir\n")
 
         elif opcion_trabajador_verificada == "3":
             mostrar_ingrediente("inventario.csv")
-            opcion_trabajador_verificada = input("Desea hacer algo mas?\n1.-Mostrar el capital actual de la pizzeria\n2.-Mostrar cuanto gasto un cliente\n3.-Mostrar cuanto queda de algun ingrediente\n4.-Modificar archivo de clientes o ventas\n5.-Mostrar total de propinas\n6.-Mostrar total de ganancias\n7.-Comprar ingredientes\n8.-Salir\n")
+            opcion_trabajador_verificada = input("Desea hacer algo mas?\n1.-Mostrar el capital actual de la pizzeria\n2.-Mostrar cuanto gasto un cliente\n3.-Mostrar cuanto queda de algun ingrediente\n4.-Eliminar cliente o venta\n5.-Mostrar total de propinas\n6.-Mostrar total de ganancias\n7.-Comprar ingredientes\n8.-Salir\n")
 
         elif opcion_trabajador_verificada == "4":
-            print("Funcion aun no implementada")
-            opcion_trabajador_verificada = input("Desea hacer algo mas?\n1.-Mostrar el capital actual de la pizzeria\n2.-Mostrar cuanto gasto un cliente\n3.-Mostrar cuanto queda de algun ingrediente\n4.-Modificar archivo de clientes o ventas\n5.-Mostrar total de propinas\n6.-Mostrar total de ganancias\n7.-Comprar ingredientes\n8.-Salir\n")
+            opcion = input("Desea eliminar un cliente o una venta?\n1.-Cliente\n2.-Venta\n")
+            if opcion == "1":
+                eliminarCliente(archivoClientes)
+            elif opcion == "2":
+                eliminarVenta(archivoVentas)
+            opcion_trabajador_verificada = input("Desea hacer algo mas?\n1.-Mostrar el capital actual de la pizzeria\n2.-Mostrar cuanto gasto un cliente\n3.-Mostrar cuanto queda de algun ingrediente\n4.-Eliminar cliente o venta\n5.-Mostrar total de propinas\n6.-Mostrar total de ganancias\n7.-Comprar ingredientes\n8.-Salir\n")
 
         elif opcion_trabajador_verificada == "5":
             totalPropinas = propinasTotales(listaVentas)
             print("\nEl total de propinas es: {:.2f}\n".format(totalPropinas))
-            opcion_trabajador_verificada = input("Desea hacer algo mas?\n1.-Mostrar el capital actual de la pizzeria\n2.-Mostrar cuanto gasto un cliente\n3.-Mostrar cuanto queda de algun ingrediente\n4.-Modificar archivo de clientes o ventas\n5.-Mostrar total de propinas\n6.-Mostrar total de ganancias\n7.-Comprar ingredientes\n8.-Salir\n")
+            opcion_trabajador_verificada = input("Desea hacer algo mas?\n1.-Mostrar el capital actual de la pizzeria\n2.-Mostrar cuanto gasto un cliente\n3.-Mostrar cuanto queda de algun ingrediente\n4.-Eliminar cliente o venta\n5.-Mostrar total de propinas\n6.-Mostrar total de ganancias\n7.-Comprar ingredientes\n8.-Salir\n")
 
         elif opcion_trabajador_verificada == "6":
             totalGanancias = gananciasTotales(listaVentas)
             print("\nEl total de ganancias obtenidas en las ventas es de: {:.2f}\n".format(totalGanancias))
-            opcion_trabajador_verificada = input("Desea hacer algo mas?\n1.-Mostrar el capital actual de la pizzeria\n2.-Mostrar cuanto gasto un cliente\n3.-Mostrar cuanto queda de algun ingrediente\n4.-Modificar archivo de clientes o ventas\n5.-Mostrar total de propinas\n6.-Mostrar total de ganancias\n7.-Comprar ingredientes\n8.-Salir\n")
+            opcion_trabajador_verificada = input("Desea hacer algo mas?\n1.-Mostrar el capital actual de la pizzeria\n2.-Mostrar cuanto gasto un cliente\n3.-Mostrar cuanto queda de algun ingrediente\n4.-Eliminar cliente o venta\n5.-Mostrar total de propinas\n6.-Mostrar total de ganancias\n7.-Comprar ingredientes\n8.-Salir\n")
 
         elif opcion_trabajador_verificada == "7":
             comprarIngredientes(archivoInventario,archivoCapital)
-            opcion_trabajador_verificada = input("Desea hacer algo mas?\n1.-Mostrar el capital actual de la pizzeria\n2.-Mostrar cuanto gasto un cliente\n3.-Mostrar cuanto queda de algun ingrediente\n4.-Modificar archivo de clientes o ventas\n5.-Mostrar total de propinas\n6.-Mostrar total de ganancias\n7.-Comprar ingredientes\n8.-Salir\n")
+            opcion_trabajador_verificada = input("Desea hacer algo mas?\n1.-Mostrar el capital actual de la pizzeria\n2.-Mostrar cuanto gasto un cliente\n3.-Mostrar cuanto queda de algun ingrediente\n4.-Eliminar cliente o venta\n5.-Mostrar total de propinas\n6.-Mostrar total de ganancias\n7.-Comprar ingredientes\n8.-Salir\n")
 
         elif opcion_trabajador_verificada == "8":
             print("Saliendo, hasta la proxima!!")
 
         else:
             print("Ingrese una opcion valida")
-            opcion_trabajador_verificada = input("Que desea hacer el dia de hoy?\n1.-Mostrar el capital actual de la pizzeria\n2.-Mostrar cuanto gasto un cliente\n3.-Mostrar cuanto queda de algun ingrediente\n4.-Modificar archivo de clientes o ventas\n5.-Mostrar total de propinas\n6.-Mostrar total de ganancias\n7.-Salir\n")
+            opcion_trabajador_verificada = input("Que desea hacer el dia de hoy?\n1.-Mostrar el capital actual de la pizzeria\n2.-Mostrar cuanto gasto un cliente\n3.-Mostrar cuanto queda de algun ingrediente\n4.-Eliminar cliente o venta\n5.-Mostrar total de propinas\n6.-Mostrar total de ganancias\n7.-Salir\n")
 
 else:
     print("Ingrese una opcion valida por favor\n")
