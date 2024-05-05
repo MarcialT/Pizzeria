@@ -781,31 +781,39 @@ def eliminarCliente(archivoClientes):
     opcion = input("Ingrese el id del cliente que desea eliminar: ")
     with open(archivoClientes,'r') as archivo:
         contenido = csv.reader(archivo,delimiter=';')
+        next(contenido)
         lista = list(contenido)
         if int(opcion) > (len(lista)-1):
-            while int(opcion) > (len(lista)-1):
+            while int(opcion) > (len(lista)):
                 print("\nCliente no encontrado\n")
                 opcion = input("Ingrese el id del cliente que desea eliminar: ")
-        lista = [ linea for linea in lista if opcion != linea[0]]
+        lista = [linea for linea in lista if int(opcion) != int(linea[0])]
+        for i in range(int(opcion) - 1, len(lista)):
+            lista[i][0] = str(i + 1)
     with open(archivoClientes,'w',newline='') as archivo:
         lector = csv.writer(archivo,delimiter=';')
+        lector.writerow(['ID del cliente', 'Nombre', 'Apellido', 'Correo'])
         lector.writerows(lista)    
-    print("\nCliente eliminado\n")    
+    print("\nCliente eliminado\n")  
 
 def eliminarVenta(archivoVentas):
     opcion = input("Ingrese el id de la venta que desea eliminar: ")
     with open(archivoVentas,'r') as archivo:
         contenido = csv.reader(archivo,delimiter=';')
+        next(contenido)
         lista = list(contenido)
         if int(opcion) > (len(lista)-1):
-            while int(opcion) > (len(lista)-1):
+            while int(opcion) > (len(lista)):
                 print("\nVenta no encontrada\n")
                 opcion = input("Ingrese el id de la venta que desea eliminar: ")
-        lista = [ linea for linea in lista if opcion != linea[0]]
+        lista = [ linea for linea in lista if int(opcion) != int(linea[0])]
+        for i in range(int(opcion) - 1, len(lista)):
+            lista [i][0] = str(i + 1)
     with open(archivoVentas,'w',newline='') as archivo:
         lector = csv.writer(archivo,delimiter=';')
+        lector.writerow(['ID de venta', 'ID del cliente', 'Dinero gastado', 'nombrePizza', 'Propina'])
         lector.writerows(lista)    
-    print("\nCliente eliminado\n")
+    print("\nVenta eliminada\n")
                                                      
 # prubaGastoCliente = input("Ingrese el id: ")
 # prubaGastoCliente = input("Ingrese el id: ")
