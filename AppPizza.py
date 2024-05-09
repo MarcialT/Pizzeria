@@ -16,8 +16,6 @@ archivoVentas = 'ventas.csv'
 archivoInventario = 'inventario.csv'
 archivoCapital = 'capital.csv'
 
-capital = 4000
-
 class Clientes:
     def __init__(self, idCliente, nombre, apellido, email):
         self.idCliente = idCliente
